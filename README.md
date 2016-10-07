@@ -5,9 +5,12 @@ For Sunday
 2. walk
 3. run
 4. makeCritter
-5. getInstances
-6. clearWorld
-7. worldTimeStep
-8. displayWorld
-9. CritterWorld class
-10. Controller Components(quit, show, step)
+5. clearWorld
+6. worldTimeStep
+7. displayWorld
+8. CritterWorld class
+9. Controller Components(quit, show, step)
+
+Also, I added Critters A,B,C,D and CritterWorld
+A,B are Chris Critters
+C,D are Karl Critters
