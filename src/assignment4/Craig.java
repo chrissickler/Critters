@@ -1,176 +1,75 @@
-/* CRITTERS Critter.java
- * EE422C Project 4 submission by
- * Replace <...> with your actual data.
- * <Student1 Name>
- * <Student1 EID>
- * <Student1 5-digit Unique No.>
- * <Student2 Name>
- * <Student2 EID>
- * <Student2 5-digit Unique No.>
- * Slip days used: <0>
- * Fall 2016
- */
 package assignment4;
 
-import java.util.List;
-
-/* see the PDF for descriptions of the methods and fields in this class
- * you may add fields, methods or inner classes to Critter ONLY if you make your additions private
- * no new public, protected or default-package code or data can be added to Critter
+/*
+ * Example critter
  */
+public class Craig extends Critter {
+	
+	@Override
+	public String toString() { return "C"; }
+	
+	private static final int GENE_TOTAL = 24;
+	private int[] genes = new int[8];
+	private int dir;
+	
+	public Craig() {
+		for (int k = 0; k < 8; k += 1) {
+			genes[k] = GENE_TOTAL / 8;
+		}
+		dir = Critter.getRandomInt(8);
+	}
+	
+	public boolean fight(String not_used) { return true; }
 
-
-public abstract class Critter {
-	private static String myPackage;
-	private	static List<Critter> population = new java.util.ArrayList<Critter>();
-	private static List<Critter> babies = new java.util.ArrayList<Critter>();
-
-	// Gets the package name.  This assumes that Critter and its subclasses are all in the same package.
-	static {
-		myPackage = Critter.class.getPackage().toString().split(" ")[1];
-	}
-	
-	private static java.util.Random rand = new java.util.Random();
-	public static int getRandomInt(int max) {
-		return rand.nextInt(max);
-	}
-	
-	public static void setSeed(long new_seed) {
-		rand = new java.util.Random(new_seed);
-	}
-	
-	
-	/* a one-character long string that visually depicts your critter in the ASCII interface */
-	public String toString() { return ""; }
-	
-	private int energy = 0;
-	protected int getEnergy() { return energy; }
-	
-	private int x_coord;
-	private int y_coord;
-	
-	protected final void walk(int direction) {
-	}
-	
-	protected final void run(int direction) {
+	@Override
+	public void doTimeStep() {
+		/* take one step forward */
+		walk(dir);
 		
-	}
-	
-	protected final void reproduce(Critter offspring, int direction) {
-	}
-
-	public abstract void doTimeStep();
-	public abstract boolean fight(String oponent);
-	
-	/**
-	 * create and initialize a Critter subclass.
-	 * critter_class_name must be the unqualified name of a concrete subclass of Critter, if not,
-	 * an InvalidCritterException must be thrown.
-	 * (Java weirdness: Exception throwing does not work properly if the parameter has lower-case instead of
-	 * upper. For example, if craig is supplied instead of Craig, an error is thrown instead of
-	 * an Exception.)
-	 * @param critter_class_name
-	 * @throws InvalidCritterException
-	 */
-	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
-	}
-	
-	/**
-	 * Gets a list of critters of a specific type.
-	 * @param critter_class_name What kind of Critter is to be listed.  Unqualified class name.
-	 * @return List of Critters.
-	 * @throws InvalidCritterException
-	 */
-	public static List<Critter> getInstances(String critter_class_name) throws InvalidCritterException {
-		List<Critter> result = new java.util.ArrayList<Critter>();
-	
-		return result;
-	}
-	
-	/**
-	 * Prints out how many Critters of each type there are on the board.
-	 * @param critters List of Critters.
-	 */
-	public static void runStats(List<Critter> critters) {
-		System.out.print("" + critters.size() + " critters as follows -- ");
-		java.util.Map<String, Integer> critter_count = new java.util.HashMap<String, Integer>();
-		for (Critter crit : critters) {
-			String crit_string = crit.toString();
-			Integer old_count = critter_count.get(crit_string);
-			if (old_count == null) {
-				critter_count.put(crit_string,  1);
-			} else {
-				critter_count.put(crit_string, old_count.intValue() + 1);
+		if (getEnergy() > 150) {
+			Craig child = new Craig();
+			for (int k = 0; k < 8; k += 1) {
+				child.genes[k] = this.genes[k];
 			}
-		}
-		String prefix = "";
-		for (String s : critter_count.keySet()) {
-			System.out.print(prefix + s + ":" + critter_count.get(s));
-			prefix = ", ";
-		}
-		System.out.println();		
-	}
-	
-	/* the TestCritter class allows some critters to "cheat". If you want to 
-	 * create tests of your Critter model, you can create subclasses of this class
-	 * and then use the setter functions contained here. 
-	 * 
-	 * NOTE: you must make sure that the setter functions work with your implementation
-	 * of Critter. That means, if you're recording the positions of your critters
-	 * using some sort of external grid or some other data structure in addition
-	 * to the x_coord and y_coord functions, then you MUST update these setter functions
-	 * so that they correctly update your grid/data structure.
-	 */
-	static abstract class TestCritter extends Critter {
-		protected void setEnergy(int new_energy_value) {
-			super.energy = new_energy_value;
+			int g = Critter.getRandomInt(8);
+			while (child.genes[g] == 0) {
+				g = Critter.getRandomInt(8);
+			}
+			child.genes[g] -= 1;
+			g = Critter.getRandomInt(8);
+			child.genes[g] += 1;
+			reproduce(child, Critter.getRandomInt(8));
 		}
 		
-		protected void setX_coord(int new_x_coord) {
-			super.x_coord = new_x_coord;
+		/* pick a new direction based on our genes */
+		int roll = Critter.getRandomInt(GENE_TOTAL);
+		int turn = 0;
+		while (genes[turn] <= roll) {
+			roll = roll - genes[turn];
+			turn = turn + 1;
 		}
+		assert(turn < 8);
 		
-		protected void setY_coord(int new_y_coord) {
-			super.y_coord = new_y_coord;
-		}
-		
-		protected int getX_coord() {
-			return super.x_coord;
-		}
-		
-		protected int getY_coord() {
-			return super.y_coord;
-		}
-		
-
-		/*
-		 * This method getPopulation has to be modified by you if you are not using the population
-		 * ArrayList that has been provided in the starter code.  In any case, it has to be
-		 * implemented for grading tests to work.
-		 */
-		protected static List<Critter> getPopulation() {
-			return population;
-		}
-		
-		/*
-		 * This method getBabies has to be modified by you if you are not using the babies
-		 * ArrayList that has been provided in the starter code.  In any case, it has to be
-		 * implemented for grading tests to work.  Babies should be added to the general population 
-		 * at either the beginning OR the end of every timestep.
-		 */
-		protected static List<Critter> getBabies() {
-			return babies;
-		}
+		dir = (dir + turn) % 8;
 	}
 
-	/**
-	 * Clear the world of all critters, dead and alive
-	 */
-	public static void clearWorld() {
+	public static void runStats(java.util.List<Critter> craigs) {
+		int total_straight = 0;
+		int total_left = 0;
+		int total_right = 0;
+		int total_back = 0;
+		for (Object obj : craigs) {
+			Craig c = (Craig) obj;
+			total_straight += c.genes[0];
+			total_right += c.genes[1] + c.genes[2] + c.genes[3];
+			total_back += c.genes[4];
+			total_left += c.genes[5] + c.genes[6] + c.genes[7];
+		}
+		System.out.print("" + craigs.size() + " total Craigs    ");
+		System.out.print("" + total_straight / (GENE_TOTAL * 0.01 * craigs.size()) + "% straight   ");
+		System.out.print("" + total_back / (GENE_TOTAL * 0.01 * craigs.size()) + "% back   ");
+		System.out.print("" + total_right / (GENE_TOTAL * 0.01 * craigs.size()) + "% right   ");
+		System.out.print("" + total_left / (GENE_TOTAL * 0.01 * craigs.size()) + "% left   ");
+		System.out.println();
 	}
-	
-	public static void worldTimeStep() {
-	}
-	
-	public static void displayWorld() {}
 }
