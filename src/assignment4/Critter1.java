@@ -1,13 +1,17 @@
 package assignment4;
 
-public class CritterC extends Critter{
+public class Critter1 extends Critter{
+	private int x;
+	private int y;
+	private int energy;
+	public Critter1(int numX, int numY) {
+		x = numX;
+		y = numY;
+	}
 
-	private int xC;
-	private int yC;
-	
-	public CritterC(int x, int y){
-		xC = x;
-		yC = y;
+	@Override 
+	public String toString(){
+		return "1";
 	}
 	
 	@Override

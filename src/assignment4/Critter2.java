@@ -1,13 +1,18 @@
 package assignment4;
 
-public class CritterA extends Critter{
+public class Critter2 extends Critter{
 	
-	private int xA;
-	private int yA;
+	private int x;
+	private int y;
 	
-	public CritterA(int x, int y){
-		xA = x;
-		yA = y;
+	public Critter2(int numX, int numY) {
+		x = numX;
+		y = numY;
+	}
+
+	@Override
+	public String toString(){
+		return "2";
 	}
 	
 	@Override

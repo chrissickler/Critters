@@ -5,48 +5,48 @@ import java.util.Random;
 
 public class CritterWorld {
 	
-	private ArrayList<CritterA> critterListA;
-	private ArrayList<CritterB> critterListB;
-	private ArrayList<CritterC> critterListC;
-	private ArrayList<CritterD> critterListD;
+	private ArrayList<Critter1> critterList1;
+	private ArrayList<Critter2> critterList2;
+	private ArrayList<Critter3> critterList3;
+	private ArrayList<Critter4> critterList4;
 	private int width;
 	private int height;
 	
 	public CritterWorld(){
-		critterListA = new ArrayList<CritterA>();
-		critterListB = new ArrayList<CritterB>();
-		critterListC = new ArrayList<CritterC>();
-		critterListD = new ArrayList<CritterD>();
+		critterList1 = new ArrayList<Critter1>();
+		critterList2 = new ArrayList<Critter2>();
+		critterList3 = new ArrayList<Critter3>();
+		critterList4 = new ArrayList<Critter4>();
 		width = Params.world_width;
 		height = Params.world_height;
 	}
-	public void addCritterA(){
+	public void addCritter1(){
 		Random r = new Random();
 		int numX = r.nextInt((width)) + 1;
 		int numY = r.nextInt((height)) + 1;
-		CritterA c = new CritterA(numX, numY);
-		critterListA.add(c);
+		Critter1 c = new Critter1(numX, numY);
+		critterList1.add(c);
 	}
-	public void addCritterB(){
+	public void addCritter2(){
 		Random r = new Random();
 		int numX = r.nextInt((width)) + 1;
 		int numY = r.nextInt((height)) + 1;
-		CritterB c = new CritterB(numX, numY);
-		critterListB.add(c);
+		Critter2 c = new Critter2(numX, numY);
+		critterList2.add(c);
 	}
-	public void addCritterC(){
+	public void addCritter3(){
 		Random r = new Random();
 		int numX = r.nextInt((width)) + 1;
 		int numY = r.nextInt((height)) + 1;
-		CritterC c = new CritterC(numX, numY);
-		critterListC.add(c);
+		Critter3 c = new Critter3(numX, numY);
+		critterList3.add(c);
 	}
-	public void addCritterD(){
+	public void addCritter4(){
 		Random r = new Random();
 		int numX = r.nextInt((width)) + 1;
 		int numY = r.nextInt((height)) + 1;
-		CritterD c = new CritterD(numX, numY);
-		critterListD.add(c);
+		Critter4 c = new Critter4(numX, numY);
+		critterList4.add(c);
 	}
 	
 }

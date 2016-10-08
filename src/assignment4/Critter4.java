@@ -1,14 +1,19 @@
 package assignment4;
 
-public class CritterD extends Critter{
+public class Critter4 extends Critter{
 
-	private String name;
-	private int xD;
-	private int yD;
+	private int x;
+	private int y;
+	private int energy;
 	
-	public CritterD(int x, int y){
-		xD = x;
-		yD = y;
+	public Critter4(int numX, int numY) {
+		x = numX;
+		y = numY;
+	}
+
+	@Override
+	public String toString(){
+		return "4";
 	}
 	
 	@Override
