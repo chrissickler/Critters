@@ -1,9 +1,10 @@
 package assignment4;
 
 public class Critter1 extends Critter{
+	
 	private int x;
 	private int y;
-	private int energy;
+	
 	public Critter1(int numX, int numY) {
 		x = numX;
 		y = numY;

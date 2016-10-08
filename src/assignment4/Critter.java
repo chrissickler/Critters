@@ -75,16 +75,16 @@ public abstract class Critter {
 	 */
 	
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
-		if(critter_class_name.compareTo("CritterA") == 0){
+		if(critter_class_name.compareTo("Critter1") == 0){
 			//CritterWorld.addCritterA();
 		}
-		if(critter_class_name.compareTo("CritterB") == 0){
+		if(critter_class_name.compareTo("Critter2") == 0){
 			//CritterWorld.addCritterB();
 		}
-		if(critter_class_name.compareTo("CritterC") == 0){
+		if(critter_class_name.compareTo("Critter3") == 0){
 			//CritterWorld.addCritterC();
 		}
-		if(critter_class_name.compareTo("CritterD") == 0){
+		if(critter_class_name.compareTo("Critter4") == 0){
 			//CritterWorld.addCritterD();
 		}
 		else{

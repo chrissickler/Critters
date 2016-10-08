@@ -4,8 +4,7 @@ public class Critter4 extends Critter{
 
 	private int x;
 	private int y;
-	private int energy;
-	
+		
 	public Critter4(int numX, int numY) {
 		x = numX;
 		y = numY;
