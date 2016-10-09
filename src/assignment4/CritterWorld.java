@@ -28,53 +28,33 @@ public class CritterWorld {
 		isOccupied = new boolean[width][height];
 	}
 	public static void addCritter1(Critter1 c1){
-		int numX = Critter.getRandomInt(width);
-		int numY = Critter.getRandomInt(height);
-		while(isOccupied[numX][numY] == true){
-			numX = Critter.getRandomInt(width);
-			numY = Critter.getRandomInt(height);
-		}
-		c1.setX(numX);
-		c1.setY(numY);
+		Pair p = CritterWorld.getNextAvailableLocation();
+		c1.setX(p.getX());
+		c1.setY(p.getY());
 		c1.setDir(Critter.getRandomInt(8));
 		c1.setEnergy(Params.start_energy);
 		critterList1.add(c1);
 	}
 	public static void addCritter2(Critter2 c2){
-		int numX = Critter.getRandomInt(width);
-		int numY = Critter.getRandomInt(height);
-		while(isOccupied[numX][numY] == true){
-			numX = Critter.getRandomInt(width);
-			numY = Critter.getRandomInt(height);
-		}
-		c2.setX(numX);
-		c2.setY(numY);
+		Pair p = CritterWorld.getNextAvailableLocation();
+		c2.setX(p.getX());
+		c2.setY(p.getY());
 		c2.setDir(Critter.getRandomInt(8));
 		c2.setEnergy(Params.start_energy);
 		critterList2.add(c2);
 	}
 	public static void addCritter3(Critter3 c3){
-		int numX = Critter.getRandomInt(width);
-		int numY = Critter.getRandomInt(height);
-		while(isOccupied[numX][numY] == true){
-			numX = Critter.getRandomInt(width);
-			numY = Critter.getRandomInt(height);
-		}
-		c3.setX(numX);
-		c3.setY(numY);
+		Pair p = CritterWorld.getNextAvailableLocation();
+		c3.setX(p.getX());
+		c3.setY(p.getY());
 		c3.setDir(Critter.getRandomInt(8));
 		c3.setEnergy(Params.start_energy);
 		critterList3.add(c3);
 	}
 	public static void addCritter4(Critter4 c4){
-		int numX = Critter.getRandomInt(width);
-		int numY = Critter.getRandomInt(height);
-		while(isOccupied[numX][numY] == true){
-			numX = Critter.getRandomInt(width);
-			numY = Critter.getRandomInt(height);
-		}
-		c4.setX(numX);
-		c4.setY(numY);
+		Pair p = CritterWorld.getNextAvailableLocation();
+		c4.setX(p.getX());
+		c4.setY(p.getY());
 		c4.setDir(Critter.getRandomInt(8));
 		c4.setEnergy(Params.start_energy);
 		critterList4.add(c4);
@@ -142,6 +122,34 @@ public class CritterWorld {
 		}
 		for(Algae i : CritterWorld.algaeList){
 			i.doTimeStep();
+		}
+	}
+	public static Pair getNextAvailableLocation(){
+		int numX = Critter.getRandomInt(width);
+		int numY = Critter.getRandomInt(height);
+		while(isOccupied[numX][numY] == true){
+			numX = Critter.getRandomInt(width);
+			numY = Critter.getRandomInt(height);
+		}
+		Pair p = new Pair();
+		p.setX(numX);
+		p.setY(numY);
+		return p;
+	}
+	class Pair{
+		int x;
+		int y;
+		public int getX() {
+			return x;
+		}
+		public void setX(int x) {
+			this.x = x;
+		}
+		public int getY() {
+			return y;
+		}
+		public void setY(int y) {
+			this.y = y;
 		}
 	}
 }
