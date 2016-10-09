@@ -52,6 +52,7 @@ public abstract class Critter {
 	private int y_coord;
 	
 	protected final void walk(int direction) {
+		int walkEnergy = Params.walk_energy_cost;
 		
 	}
 	
@@ -77,28 +78,6 @@ public abstract class Critter {
 	 */
 	
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
-//		if(critter_class_name.compareTo("Critter1") == 0){
-//			CritterWorld.addCritter1(Params.start_energy);
-//		}
-//		else if(critter_class_name.compareTo("Critter2") == 0){
-//			CritterWorld.addCritter2(Params.start_energy);
-//		}
-//		else if(critter_class_name.compareTo("Critter3") == 0){
-//			CritterWorld.addCritter3(Params.start_energy);
-//		}
-//		else if(critter_class_name.compareTo("Critter4") == 0){
-//			CritterWorld.addCritter4(Params.start_energy);
-//		}
-//		else if(critter_class_name.compareTo("Craig") == 0){
-//			
-//		}
-//		else if(critter_class_name.compareTo("Algae") == 0){
-//			
-//		}
-//		else{
-//			throw new InvalidCritterException(critter_class_name);
-//		}
-		
 		try{
 			Class c = Class.forName(critter_class_name);
 			try{
@@ -232,25 +211,8 @@ public abstract class Critter {
 	}
 	
 	public static void worldTimeStep() {
-		for(Critter1 i : CritterWorld.critterList1){
-			i.doTimeStep();
-		}
-		for(Critter2 i : CritterWorld.critterList2){
-			i.doTimeStep();
-		}
-		for(Critter3 i : CritterWorld.critterList3){
-			i.doTimeStep();
-		}
-		for(Critter4 i : CritterWorld.critterList4){
-			i.doTimeStep();
-		}
-		for(Craig i : CritterWorld.craigList){
-			i.doTimeStep();
-		}
-		for(Algae i : CritterWorld.algaeList){
-			i.doTimeStep();
-		}
-		
+		CritterWorld.removeDead();
+		CritterWorld.doTimeSteps();
 	}
 	
 	public static void displayWorld() {
