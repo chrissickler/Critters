@@ -93,4 +93,11 @@ public class CritterWorld {
 		}
 		
 	}
+	public static boolean checkOccupied(int x, int y){
+		if(isOccupied[x][y] == true){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

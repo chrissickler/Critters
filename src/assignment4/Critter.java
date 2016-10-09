@@ -232,6 +232,25 @@ public abstract class Critter {
 	}
 	
 	public static void worldTimeStep() {
+		for(Critter1 i : CritterWorld.critterList1){
+			i.doTimeStep();
+		}
+		for(Critter2 i : CritterWorld.critterList2){
+			i.doTimeStep();
+		}
+		for(Critter3 i : CritterWorld.critterList3){
+			i.doTimeStep();
+		}
+		for(Critter4 i : CritterWorld.critterList4){
+			i.doTimeStep();
+		}
+		for(Craig i : CritterWorld.craigList){
+			i.doTimeStep();
+		}
+		for(Algae i : CritterWorld.algaeList){
+			i.doTimeStep();
+		}
+		
 	}
 	
 	public static void displayWorld() {
