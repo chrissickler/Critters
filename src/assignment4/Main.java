@@ -68,6 +68,7 @@ public class Main {
 
         /* Do not alter the code above for your submission. */
         /* Write your code below. */
+        CritterWorld cw = new CritterWorld();
         
         System.out.println("GLHF");
         

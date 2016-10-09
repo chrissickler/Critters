@@ -14,7 +14,7 @@ For Sunday
 	//this though to make an object(Main?)
 9. Controller Components(quit, show, step)
 
-Also, I added Critters A,B,C,D and CritterWorld
-A,B are Chris Critters
-C,D are Karl Critters
+Also, I added Critters 1,2,3,4 and CritterWorld
+1,2 are Chris Critters
+3,4 are Karl Critters
 	//added all 4 and just made basic constructors

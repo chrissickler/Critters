@@ -12,6 +12,7 @@
  */
 package assignment4;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /* see the PDF for descriptions of the methods and fields in this class
@@ -51,6 +52,7 @@ public abstract class Critter {
 	private int y_coord;
 	
 	protected final void walk(int direction) {
+		
 	}
 	
 	protected final void run(int direction) {
@@ -76,16 +78,22 @@ public abstract class Critter {
 	
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
 		if(critter_class_name.compareTo("Critter1") == 0){
-			//CritterWorld.addCritterA();
+			CritterWorld.addCritter1(Params.start_energy);
 		}
-		if(critter_class_name.compareTo("Critter2") == 0){
-			//CritterWorld.addCritterB();
+		else if(critter_class_name.compareTo("Critter2") == 0){
+			CritterWorld.addCritter2(Params.start_energy);
 		}
-		if(critter_class_name.compareTo("Critter3") == 0){
-			//CritterWorld.addCritterC();
+		else if(critter_class_name.compareTo("Critter3") == 0){
+			CritterWorld.addCritter3(Params.start_energy);
 		}
-		if(critter_class_name.compareTo("Critter4") == 0){
-			//CritterWorld.addCritterD();
+		else if(critter_class_name.compareTo("Critter4") == 0){
+			CritterWorld.addCritter4(Params.start_energy);
+		}
+		else if(critter_class_name.compareTo("Craig") == 0){
+			
+		}
+		else if(critter_class_name.compareTo("Algae") == 0){
+			
 		}
 		else{
 			throw new InvalidCritterException(critter_class_name);
@@ -100,6 +108,13 @@ public abstract class Critter {
 	 */
 	public static List<Critter> getInstances(String critter_class_name) throws InvalidCritterException {
 		List<Critter> result = new java.util.ArrayList<Critter>();
+		if(critter_class_name.compareTo("Craig")==0){
+			ArrayList<Craig> c = CritterWorld.craigList;
+			for(Craig i : c){
+				result.add(i);
+			}
+		}
+		
 	
 		return result;
 	}
