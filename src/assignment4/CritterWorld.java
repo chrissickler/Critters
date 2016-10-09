@@ -28,7 +28,7 @@ public class CritterWorld {
 		isOccupied = new boolean[width][height];
 	}
 	public static void addCritter1(Critter1 c1){
-		Pair p = CritterWorld.getNextAvailableLocation();
+		Point p = CritterWorld.getNextAvailableLocation();
 		c1.setX(p.getX());
 		c1.setY(p.getY());
 		c1.setDir(Critter.getRandomInt(8));
@@ -36,7 +36,7 @@ public class CritterWorld {
 		critterList1.add(c1);
 	}
 	public static void addCritter2(Critter2 c2){
-		Pair p = CritterWorld.getNextAvailableLocation();
+		Point p = CritterWorld.getNextAvailableLocation();
 		c2.setX(p.getX());
 		c2.setY(p.getY());
 		c2.setDir(Critter.getRandomInt(8));
@@ -44,7 +44,7 @@ public class CritterWorld {
 		critterList2.add(c2);
 	}
 	public static void addCritter3(Critter3 c3){
-		Pair p = CritterWorld.getNextAvailableLocation();
+		Point p = CritterWorld.getNextAvailableLocation();
 		c3.setX(p.getX());
 		c3.setY(p.getY());
 		c3.setDir(Critter.getRandomInt(8));
@@ -52,7 +52,7 @@ public class CritterWorld {
 		critterList3.add(c3);
 	}
 	public static void addCritter4(Critter4 c4){
-		Pair p = CritterWorld.getNextAvailableLocation();
+		Point p = CritterWorld.getNextAvailableLocation();
 		c4.setX(p.getX());
 		c4.setY(p.getY());
 		c4.setDir(Critter.getRandomInt(8));
@@ -124,32 +124,17 @@ public class CritterWorld {
 			i.doTimeStep();
 		}
 	}
-	public static Pair getNextAvailableLocation(){
+	public static Point getNextAvailableLocation(){
 		int numX = Critter.getRandomInt(width);
 		int numY = Critter.getRandomInt(height);
 		while(isOccupied[numX][numY] == true){
 			numX = Critter.getRandomInt(width);
 			numY = Critter.getRandomInt(height);
 		}
-		Pair p = new Pair();
+		Point p = new Point();
 		p.setX(numX);
 		p.setY(numY);
 		return p;
 	}
-	class Pair{
-		int x;
-		int y;
-		public int getX() {
-			return x;
-		}
-		public void setX(int x) {
-			this.x = x;
-		}
-		public int getY() {
-			return y;
-		}
-		public void setY(int y) {
-			this.y = y;
-		}
-	}
+	
 }
