@@ -7,12 +7,48 @@ public class Critter2 extends Critter{
 	private int dir;
 	private int energy;
 	
-	public Critter2(int numX, int numY, int startEnergy) {
-		x = numX;
-		y = numY;
-		dir = Critter.getRandomInt(8);
-		energy = startEnergy;
+	public Critter2(){}
+
+
+	public int getX() {
+		return x;
 	}
+
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+
+	public int getY() {
+		return y;
+	}
+
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+
+	public int getDir() {
+		return dir;
+	}
+
+
+	public void setDir(int dir) {
+		this.dir = dir;
+	}
+
+
+	public int getEnergy() {
+		return energy;
+	}
+
+
+	public void setEnergy(int energy) {
+		this.energy = energy;
+	}
+
 
 	@Override
 	public String toString(){

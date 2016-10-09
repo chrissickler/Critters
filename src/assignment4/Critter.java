@@ -77,25 +77,55 @@ public abstract class Critter {
 	 */
 	
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
-		if(critter_class_name.compareTo("Critter1") == 0){
-			CritterWorld.addCritter1(Params.start_energy);
-		}
-		else if(critter_class_name.compareTo("Critter2") == 0){
-			CritterWorld.addCritter2(Params.start_energy);
-		}
-		else if(critter_class_name.compareTo("Critter3") == 0){
-			CritterWorld.addCritter3(Params.start_energy);
-		}
-		else if(critter_class_name.compareTo("Critter4") == 0){
-			CritterWorld.addCritter4(Params.start_energy);
-		}
-		else if(critter_class_name.compareTo("Craig") == 0){
-			
-		}
-		else if(critter_class_name.compareTo("Algae") == 0){
-			
-		}
-		else{
+//		if(critter_class_name.compareTo("Critter1") == 0){
+//			CritterWorld.addCritter1(Params.start_energy);
+//		}
+//		else if(critter_class_name.compareTo("Critter2") == 0){
+//			CritterWorld.addCritter2(Params.start_energy);
+//		}
+//		else if(critter_class_name.compareTo("Critter3") == 0){
+//			CritterWorld.addCritter3(Params.start_energy);
+//		}
+//		else if(critter_class_name.compareTo("Critter4") == 0){
+//			CritterWorld.addCritter4(Params.start_energy);
+//		}
+//		else if(critter_class_name.compareTo("Craig") == 0){
+//			
+//		}
+//		else if(critter_class_name.compareTo("Algae") == 0){
+//			
+//		}
+//		else{
+//			throw new InvalidCritterException(critter_class_name);
+//		}
+		
+		try{
+			Class c = Class.forName(critter_class_name);
+			try{
+				Critter1 c1 = (Critter1) c.newInstance();
+				CritterWorld.addCritter1(c1);
+			}catch(Exception e){}
+			try{
+				Critter2 c2 = (Critter2) c.newInstance();
+				CritterWorld.addCritter2(c2);
+			}catch(Exception e){}
+			try{
+				Critter3 c3 = (Critter3) c.newInstance();
+				CritterWorld.addCritter3(c3);
+			}catch(Exception e){}
+			try{
+				Critter4 c4 = (Critter4) c.newInstance();
+				CritterWorld.addCritter4(c4);
+			}catch(Exception e){}
+			try{
+				Craig cr = (Craig) c.newInstance();
+				CritterWorld.addCraig(cr);
+			}catch(Exception e){}
+			try{
+				Algae a = (Algae) c.newInstance();
+				CritterWorld.addAlgae(a);
+			}catch(Exception e){}
+		}catch(ClassNotFoundException e){
 			throw new InvalidCritterException(critter_class_name);
 		}
 	}
