@@ -70,56 +70,36 @@ public abstract class Critter {
 		}
 		else {
 			return null;
-		}
-		
-	}
-	
-	protected int getEnergy() { 
-		if(this instanceof Critter1) {
-			Critter1 critter = (Critter1) this;
-			return critter.getEnergy();
-		}
-		else if(this instanceof Critter2) {
-			Critter2 critter = (Critter2) this;
-			return critter.getEnergy();
-		}
-		else if(this instanceof Critter3) {
-			Critter3 critter = (Critter3) this;
-			return critter.getEnergy();
-		}
-		else if(this instanceof Critter4) {
-			Critter4 critter = (Critter4) this;
-			return critter.getEnergy();
-		}
-		else if(this instanceof Craig) {
-			Craig critter = (Craig) this;
-			return critter.getEnergy();
-		}
-		else if(this instanceof Algae) {
-			Algae critter = (Algae) this;
-			return critter.getEnergy();
-		}
-		else {
-			return -1;
 		}		
 	}
+
+	private int energy = 0;
+	protected int getEnergy() {
+		return this.energy;
+	}
+	
 	private int x_coord;
 	private int y_coord;
 	protected final void walk(int direction) {
-		int walkEnergy = Params.walk_energy_cost;
-				
+		energy -= Params.walk_energy_cost;
+		direction = direction % 8;
+		if(direction > 4) y_coord ++;
+		else if (direction < 4 && direction > 0 ) y_coord --;
+		if (direction == 7 || direction < 2) x_coord ++;
+		else if (direction < 6 && direction > 2) x_coord --;
 	}
 	
 	protected final void run(int direction) {
-		int runEnergy = Params.run_energy_cost;
-		
+		energy -= Params.run_energy_cost;	
+		direction = direction % 8;
+		if(direction > 4) y_coord +=2;
+		else if (direction < 4 && direction > 0 ) y_coord -=2;
+		if (direction == 7 || direction < 2) x_coord +=2;
+		else if (direction < 6 && direction > 2) x_coord -=2;
 	}
 	
 	protected final void reproduce(Critter offspring, int direction) {
-		if(offspring instanceof Critter1) {
-			Critter1 critter = (Critter1) offspring;
-			
-		}
+		CritterWorld.addCritter(offspring);
 	}
 
 	public abstract void doTimeStep();
@@ -175,15 +155,15 @@ public abstract class Critter {
 	 */
 	public static List<Critter> getInstances(String critter_class_name) throws InvalidCritterException {
 		List<Critter> result = new java.util.ArrayList<Critter>();
-		if(critter_class_name.compareTo("Craig")==0){
-			ArrayList<Critter> c = CritterWorld.critterList;
-			for(Critter i : c){
-				if(i instanceof Craig)
-					result.add(i);
+		for(Critter i : CritterWorld.critterList) {
+			if(i.toString() == critter_class_name) { 	//FIXME
+				result.add(i);
 			}
-		}	
+		}
 		return result;
 	}
+	
+	
 	
 	/**
 	 * Prints out how many Critters of each type there are on the board.
