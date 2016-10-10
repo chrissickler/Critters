@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CritterWorld {
-<<<<<<< HEAD
 	public static ArrayList<Critter> critterList = new ArrayList<Critter>();
 	private static int width = Params.world_width;
 	private static int height = Params.world_height;
@@ -17,7 +16,6 @@ public class CritterWorld {
 		c.setDir(Critter.getRandomInt(8));
 		c.setEnergy(Params.start_energy);
 		critterList.add(c);
-=======
 	
 	public static ArrayList<Critter1> critterList1;
 	public static ArrayList<Critter2> critterList2;
@@ -72,7 +70,6 @@ public class CritterWorld {
 		c4.setDir(Critter.getRandomInt(8));
 		c4.setEnergy(Params.start_energy);
 		critterList4.add(c4);
->>>>>>> origin/master
 	}
 	
 	public static void addCraig(Craig cr){
@@ -106,12 +103,8 @@ public class CritterWorld {
 	 		doTimeStep();
 		}
 	}
-<<<<<<< HEAD
 	
-	public static Pair getNextAvailableLocation(){
-=======
 	public static Point getNextAvailableLocation(){
->>>>>>> origin/master
 		int numX = Critter.getRandomInt(width);
 		int numY = Critter.getRandomInt(height);
 		while(isOccupied[numX][numY] == true){
@@ -124,7 +117,6 @@ public class CritterWorld {
 		return p;
 	}
 	
-<<<<<<< HEAD
 	public static void clearWorld(){
 		isOccupied = new boolean[width][height];
 		critterList = new ArrayList<Critter>();
@@ -144,27 +136,4 @@ public class CritterWorld {
 		}
 		return sb.toString();
 	}
-	
-	
-	
-	
-	
-	static class Pair{
-		int x;
-		int y;
-		public int getX() {
-			return x;
-		}
-		public void setX(int x) {
-			this.x = x;
-		}
-		public int getY() {
-			return y;
-		}
-		public void setY(int y) {
-			this.y = y;
-		}
-	}
-=======
->>>>>>> origin/master
 }
