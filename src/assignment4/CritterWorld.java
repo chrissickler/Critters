@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CritterWorld {
+<<<<<<< HEAD
 	public static ArrayList<Critter> critterList = new ArrayList<Critter>();
 	private static int width = Params.world_width;
 	private static int height = Params.world_height;
@@ -16,6 +17,62 @@ public class CritterWorld {
 		c.setDir(Critter.getRandomInt(8));
 		c.setEnergy(Params.start_energy);
 		critterList.add(c);
+=======
+	
+	public static ArrayList<Critter1> critterList1;
+	public static ArrayList<Critter2> critterList2;
+	public static ArrayList<Critter3> critterList3;
+	public static ArrayList<Critter4> critterList4;
+	public static ArrayList<Craig> craigList;
+	public static ArrayList<Algae> algaeList;
+	private static boolean[][] isOccupied;
+	private static int width;
+	private static int height;
+	
+	
+	public CritterWorld(){
+		critterList1 = new ArrayList<Critter1>();
+		critterList2 = new ArrayList<Critter2>();
+		critterList3 = new ArrayList<Critter3>();
+		critterList4 = new ArrayList<Critter4>();
+		craigList = new ArrayList<Craig>();
+		algaeList = new ArrayList<Algae>();
+		width = Params.world_width;
+		height = Params.world_height;
+		isOccupied = new boolean[width][height];
+	}
+	public static void addCritter1(Critter1 c1){
+		Point p = CritterWorld.getNextAvailableLocation();
+		c1.setX(p.getX());
+		c1.setY(p.getY());
+		c1.setDir(Critter.getRandomInt(8));
+		c1.setEnergy(Params.start_energy);
+		critterList1.add(c1);
+	}
+	public static void addCritter2(Critter2 c2){
+		Point p = CritterWorld.getNextAvailableLocation();
+		c2.setX(p.getX());
+		c2.setY(p.getY());
+		c2.setDir(Critter.getRandomInt(8));
+		c2.setEnergy(Params.start_energy);
+		critterList2.add(c2);
+	}
+	public static void addCritter3(Critter3 c3){
+		Point p = CritterWorld.getNextAvailableLocation();
+		c3.setX(p.getX());
+		c3.setY(p.getY());
+		c3.setDir(Critter.getRandomInt(8));
+		c3.setEnergy(Params.start_energy);
+		critterList3.add(c3);
+	}
+	public static void addCritter4(Critter4 c4){
+		Point p = CritterWorld.getNextAvailableLocation();
+		c4.setX(p.getX());
+		c4.setY(p.getY());
+		c4.setDir(Critter.getRandomInt(8));
+		c4.setEnergy(Params.start_energy);
+		critterList4.add(c4);
+>>>>>>> origin/master
 	}
 	
 	public static void addCraig(Craig cr){
@@ -49,20 +106,25 @@ public class CritterWorld {
 	 		doTimeStep();
 		}
 	}
+<<<<<<< HEAD
 	
 	public static Pair getNextAvailableLocation(){
+=======
+	public static Point getNextAvailableLocation(){
+>>>>>>> origin/master
 		int numX = Critter.getRandomInt(width);
 		int numY = Critter.getRandomInt(height);
 		while(isOccupied[numX][numY] == true){
 			numX = Critter.getRandomInt(width);
 			numY = Critter.getRandomInt(height);
 		}
-		Pair p = new Pair();
+		Point p = new Point();
 		p.setX(numX);
 		p.setY(numY);
 		return p;
 	}
 	
+<<<<<<< HEAD
 	public static void clearWorld(){
 		isOccupied = new boolean[width][height];
 		critterList = new ArrayList<Critter>();
@@ -103,4 +165,6 @@ public class CritterWorld {
 			this.y = y;
 		}
 	}
+=======
+>>>>>>> origin/master
 }
