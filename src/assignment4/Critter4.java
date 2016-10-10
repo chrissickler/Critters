@@ -9,6 +9,7 @@ public class Critter4 extends Critter{
 	
 	public Critter4(){}
 
+	
 	public int getX() {
 		return x;
 	}

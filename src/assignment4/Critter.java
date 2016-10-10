@@ -43,24 +43,83 @@ public abstract class Critter {
 	
 	
 	/* a one-character long string that visually depicts your critter in the ASCII interface */
-	public String toString() { return ""; }
-	
-	private int energy = 0;
-	protected int getEnergy() { return energy; }
-	
-	private int x_coord;
-	private int y_coord;
-	
-	protected final void walk(int direction) {
-		int walkEnergy = Params.walk_energy_cost;
+	public String toString() {
+		if(this instanceof Critter1) {
+			Critter1 critter = (Critter1) this;
+			return critter.toString();
+		}
+		else if(this instanceof Critter2) {
+			Critter2 critter = (Critter2) this;
+			return critter.toString();
+		}
+		else if(this instanceof Critter3) {
+			Critter3 critter = (Critter3) this;
+			return critter.toString();
+		}
+		else if(this instanceof Critter4) {
+			Critter4 critter = (Critter4) this;
+			return critter.toString();
+		}
+		else if(this instanceof Craig) {
+			Craig critter = (Craig) this;
+			return critter.toString();
+		}
+		else if(this instanceof Algae) {
+			Algae critter = (Algae) this;
+			return critter.toString();
+		}
+		else {
+			return null;
+		}
 		
 	}
 	
+	protected int getEnergy() { 
+		if(this instanceof Critter1) {
+			Critter1 critter = (Critter1) this;
+			return critter.getEnergy();
+		}
+		else if(this instanceof Critter2) {
+			Critter2 critter = (Critter2) this;
+			return critter.getEnergy();
+		}
+		else if(this instanceof Critter3) {
+			Critter3 critter = (Critter3) this;
+			return critter.getEnergy();
+		}
+		else if(this instanceof Critter4) {
+			Critter4 critter = (Critter4) this;
+			return critter.getEnergy();
+		}
+		else if(this instanceof Craig) {
+			Craig critter = (Craig) this;
+			return critter.getEnergy();
+		}
+		else if(this instanceof Algae) {
+			Algae critter = (Algae) this;
+			return critter.getEnergy();
+		}
+		else {
+			return -1;
+		}		
+	}
+	private int x_coord;
+	private int y_coord;
+	protected final void walk(int direction) {
+		int walkEnergy = Params.walk_energy_cost;
+				
+	}
+	
 	protected final void run(int direction) {
+		int runEnergy = Params.run_energy_cost;
 		
 	}
 	
 	protected final void reproduce(Critter offspring, int direction) {
+		if(offspring instanceof Critter1) {
+			Critter1 critter = (Critter1) offspring;
+			
+		}
 	}
 
 	public abstract void doTimeStep();
@@ -75,34 +134,33 @@ public abstract class Critter {
 	 * an Exception.)
 	 * @param critter_class_name
 	 * @throws InvalidCritterException
-	 */
-	
+	 */	
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
 		try{
-			Class c = Class.forName(critter_class_name);
+			Class c = Class.forName(critter_class_name);			
 			try{
 				Critter1 c1 = (Critter1) c.newInstance();
-				CritterWorld.addCritter1(c1);
+				CritterWorld.addCritter(c1);
 			}catch(Exception e){}
 			try{
 				Critter2 c2 = (Critter2) c.newInstance();
-				CritterWorld.addCritter2(c2);
+				CritterWorld.addCritter(c2);
 			}catch(Exception e){}
 			try{
 				Critter3 c3 = (Critter3) c.newInstance();
-				CritterWorld.addCritter3(c3);
+				CritterWorld.addCritter(c3);
 			}catch(Exception e){}
 			try{
 				Critter4 c4 = (Critter4) c.newInstance();
-				CritterWorld.addCritter4(c4);
+				CritterWorld.addCritter(c4);
 			}catch(Exception e){}
 			try{
 				Craig cr = (Craig) c.newInstance();
-				CritterWorld.addCraig(cr);
+				CritterWorld.addCritter(cr);
 			}catch(Exception e){}
 			try{
 				Algae a = (Algae) c.newInstance();
-				CritterWorld.addAlgae(a);
+				CritterWorld.addCritter(a);
 			}catch(Exception e){}
 		}catch(ClassNotFoundException e){
 			throw new InvalidCritterException(critter_class_name);
@@ -118,13 +176,12 @@ public abstract class Critter {
 	public static List<Critter> getInstances(String critter_class_name) throws InvalidCritterException {
 		List<Critter> result = new java.util.ArrayList<Critter>();
 		if(critter_class_name.compareTo("Craig")==0){
-			ArrayList<Craig> c = CritterWorld.craigList;
-			for(Craig i : c){
-				result.add(i);
+			ArrayList<Critter> c = CritterWorld.critterList;
+			for(Critter i : c){
+				if(i instanceof Craig)
+					result.add(i);
 			}
-		}
-		
-	
+		}	
 		return result;
 	}
 	
@@ -208,14 +265,16 @@ public abstract class Critter {
 	 * Clear the world of all critters, dead and alive
 	 */
 	public static void clearWorld() {
+		
 	}
 	
 	public static void worldTimeStep() {
 		CritterWorld.removeDead();
-		CritterWorld.doTimeSteps();
+		CritterWorld.doTimeStep();
 	}
 	
 	public static void displayWorld() {
 		
 	}
+	
 }

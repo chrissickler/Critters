@@ -68,10 +68,37 @@ public class Main {
 
         /* Do not alter the code above for your submission. */
         /* Write your code below. */
-        CritterWorld cw = new CritterWorld();
-        
-        System.out.println("GLHF");
-        
+        String input;
+        while(true) {
+        	input = kb.next();
+        	if(input.equalsIgnoreCase("quit")) {
+        		break;
+        	}
+        	else if (input.equalsIgnoreCase("show")) {
+        		Critter.displayWorld();        		
+        	}
+        	else if (input.equalsIgnoreCase("step")) {
+        		int numSteps = 1;
+        		if(kb.hasNextInt())
+        		{
+        			input = kb.next();
+        			numSteps = Integer.parseInt(input);        			
+        		}        		
+        		CritterWorld.doTimeSteps(numSteps);
+        	}
+        	else if (input.equalsIgnoreCase("seed")) {
+        		//TODO: STAGE 2
+        	}
+        	else if (input.equalsIgnoreCase("make")) {
+        		//TODO: STAGE 2
+        	}
+        	else if (input.equalsIgnoreCase("stats")) {
+        		//TODO: STAGE 3
+        	}
+        	else {
+        		//TODO: INVALID INPUT
+        	}
+        }
         /* Write your code above */
         System.out.flush();
 

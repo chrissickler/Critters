@@ -8,6 +8,7 @@ public class Critter3 extends Critter{
 	private int energy;
 	
 	public Critter3(){}
+	
 
 	public int getX() {
 		return x;
