@@ -245,7 +245,7 @@ public abstract class Critter {
 	 * Clear the world of all critters, dead and alive
 	 */
 	public static void clearWorld() {
-		
+		CritterWorld.clearWorld();
 	}
 	
 	public static void worldTimeStep() {
@@ -254,7 +254,7 @@ public abstract class Critter {
 	}
 	
 	public static void displayWorld() {
-		
+		CritterWorld.printWorld();
 	}
 	
 }

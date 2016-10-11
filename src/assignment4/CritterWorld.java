@@ -74,7 +74,7 @@ public class CritterWorld {
 			}
 			sb.append("|\n");
 		}
-		//TODO: iterate through the world and print each oijpaoijapoij
+		//TODO: iterate through the world and print each row
 		sb.append(top);
 		System.out.println(sb.toString());
 	}
