@@ -104,7 +104,9 @@ public abstract class Critter {
 	
 	protected final void reproduce(Critter offspring, int direction) {
 		if(this.energy >= Params.min_reproduce_energy) {
-			CritterWorld.addCritter(offspring);
+			this.energy/=2;
+			offspring.energy = this.energy;
+			addCritter(offspring);
 		}
 	}
 
@@ -152,7 +154,6 @@ public abstract class Critter {
 	
 	private static void addCritter(Critter critter) {
 		if(critter != null) {
-			critter.energy = Params.start_energy;
 			Point p = CritterWorld.getNextAvailableLocation();
 			critter.x_coord = p.getX();
 			critter.y_coord = p.getY();
