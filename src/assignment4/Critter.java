@@ -103,7 +103,9 @@ public abstract class Critter {
 	}
 	
 	protected final void reproduce(Critter offspring, int direction) {
-		CritterWorld.addCritter(offspring);
+		if(this.energy >= Params.min_reproduce_energy) {
+			CritterWorld.addCritter(offspring);
+		}
 	}
 
 	public abstract void doTimeStep();
@@ -260,7 +262,6 @@ public abstract class Critter {
 	}
 	
 	public static void worldTimeStep() {
-		CritterWorld.removeDead();
 		CritterWorld.doTimeStep();
 	}
 	
