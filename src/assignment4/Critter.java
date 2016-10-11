@@ -123,35 +123,32 @@ public abstract class Critter {
 	 */	
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
 		//TODO need to go over this
+		Critter critter;
 		try{
-			Class c = Class.forName(critter_class_name);			
+			Class c = Class.forName(critter_class_name);		
+			
 			try{
-				Critter1 c1 = (Critter1) c.newInstance();
-				CritterWorld.addCritter(c1);
+				critter = (Critter1) c.newInstance();
 			}catch(Exception e){}
 			try{
-				Critter2 c2 = (Critter2) c.newInstance();
-				CritterWorld.addCritter(c2);
+				critter = (Critter2) c.newInstance();
 			}catch(Exception e){}
 			try{
-				Critter3 c3 = (Critter3) c.newInstance();
-				CritterWorld.addCritter(c3);
+				critter = (Critter3) c.newInstance();
 			}catch(Exception e){}
 			try{
-				Critter4 c4 = (Critter4) c.newInstance();
-				CritterWorld.addCritter(c4);
+				critter = (Critter4) c.newInstance();
 			}catch(Exception e){}
 			try{
-				Craig cr = (Craig) c.newInstance();
-				CritterWorld.addCritter(cr);
+				critter = (Craig) c.newInstance();
 			}catch(Exception e){}
 			try{
-				Algae a = (Algae) c.newInstance();
-				CritterWorld.addCritter(a);
+				critter = (Algae) c.newInstance();
 			}catch(Exception e){}
 		}catch(ClassNotFoundException e){
 			throw new InvalidCritterException(critter_class_name);
 		}
+		CritterWorld.addCritter(critter);
 	}
 	
 	/**
