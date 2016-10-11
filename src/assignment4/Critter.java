@@ -123,10 +123,9 @@ public abstract class Critter {
 	 */	
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
 		//TODO need to go over this
-		Critter critter;
+		Critter critter = null;
 		try{
-			Class c = Class.forName(critter_class_name);		
-			
+			Class c = Class.forName(critter_class_name);				
 			try{
 				critter = (Critter1) c.newInstance();
 			}catch(Exception e){}
@@ -148,7 +147,17 @@ public abstract class Critter {
 		}catch(ClassNotFoundException e){
 			throw new InvalidCritterException(critter_class_name);
 		}
-		CritterWorld.addCritter(critter);
+		addCritter(critter);
+	}
+	
+	private static void addCritter(Critter critter) {
+		if(critter != null) {
+			critter.energy = Params.start_energy;
+			Point p = CritterWorld.getNextAvailableLocation();
+			critter.x_coord = p.getX();
+			critter.y_coord = p.getY();
+			CritterWorld.addCritter(critter);
+		}
 	}
 	
 	/**
