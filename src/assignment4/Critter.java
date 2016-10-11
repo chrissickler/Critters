@@ -96,6 +96,12 @@ public abstract class Critter {
 		else if (direction < 4 && direction > 0 ) y_coord -=2;
 		if (direction == 7 || direction < 2) x_coord +=2;
 		else if (direction < 6 && direction > 2) x_coord -=2;
+		if(x_coord < 0){
+			x_coord += Params.world_width;
+		}
+		if(y_coord < 0){
+			y_coord += Params.world_height;
+		}
 	}
 	
 	protected final void reproduce(Critter offspring, int direction) {
@@ -116,6 +122,7 @@ public abstract class Critter {
 	 * @throws InvalidCritterException
 	 */	
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
+		//TODO need to go over this
 		try{
 			Class c = Class.forName(critter_class_name);			
 			try{
@@ -227,7 +234,7 @@ public abstract class Critter {
 		 * implemented for grading tests to work.
 		 */
 		protected static List<Critter> getPopulation() {
-			return population;
+			return CritterWorld.critterList;
 		}
 		
 		/*
