@@ -29,6 +29,7 @@ public class CritterWorld {
 	}
 	
 	public static void doTimeStep(){
+		removeDead();
 		for(Critter i : CritterWorld.critterList){
 			i.doTimeStep();
 		}
@@ -78,6 +79,7 @@ public class CritterWorld {
 		sb.append(top);
 		System.out.println(sb.toString());
 	}
+	
 	private static String topBottomRow() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("+");
