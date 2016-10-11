@@ -90,7 +90,22 @@ public class Main {
         		//TODO: STAGE 2
         	}
         	else if (input.equalsIgnoreCase("make")) {
-        		//TODO: STAGE 2
+        		String packageName = "assignment4.";
+        		String craig = "Craig";
+        		String algae = "Algae";
+        		try {
+        			for(int i = 0; i < 25; i++) {
+        				Critter.makeCritter(packageName+craig);
+        				for(int j = 0; j < 4; j++) {
+        					Critter.makeCritter(packageName+algae);
+        				}
+        			}
+				} catch (InvalidCritterException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        		
+        		
         	}
         	else if (input.equalsIgnoreCase("stats")) {
         		//TODO: STAGE 3
