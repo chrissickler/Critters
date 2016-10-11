@@ -1,12 +1,12 @@
 package assignment4;
 /**
- * This Critter is actually a male cat
+ * This Critter is actually 
  * @author Chris
  * */
 public class Critter2 extends Critter{
 	
 	private int dir;
-	public int[] genes = new int[8];
+	private int[] genes = new int[8];
 	private boolean stepTaken;
 	
 	public Critter2(){
@@ -35,7 +35,7 @@ public class Critter2 extends Critter{
 	public void doTimeStep() {
 		int percent = Critter.getRandomInt(100);
 		if(percent < 25){
-			return;//The cat/critter is asleep because its a cat
+			return;
 		}
 		else if(percent < 5){
 			run(dir);
