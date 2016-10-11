@@ -83,25 +83,23 @@ public abstract class Critter {
 	protected final void walk(int direction) {
 		energy -= Params.walk_energy_cost;
 		direction = direction % 8;
-		if(direction > 4) y_coord ++;
-		else if (direction < 4 && direction > 0 ) y_coord --;
-		if (direction == 7 || direction < 2) x_coord ++;
+		if(direction > 4) y_coord = (y_coord + 1) % Params.world_height;
+		else if (direction < 4 && direction > 0 ) y_coord--;
+		if (direction == 7 || direction < 2) x_coord = (x_coord + 1) % Params.world_width;
 		else if (direction < 6 && direction > 2) x_coord --;
-	}
-	
-	protected final void run(int direction) {
-		energy -= Params.run_energy_cost;	
-		direction = direction % 8;
-		if(direction > 4) y_coord +=2;
-		else if (direction < 4 && direction > 0 ) y_coord -=2;
-		if (direction == 7 || direction < 2) x_coord +=2;
-		else if (direction < 6 && direction > 2) x_coord -=2;
 		if(x_coord < 0){
 			x_coord += Params.world_width;
 		}
 		if(y_coord < 0){
 			y_coord += Params.world_height;
 		}
+	}
+	
+	protected final void run(int direction) {
+		walk(direction);
+		walk(direction);
+		energy += (2 * Params.walk_energy_cost);
+		energy -= Params.run_energy_cost;
 	}
 	
 	protected final void reproduce(Critter offspring, int direction) {

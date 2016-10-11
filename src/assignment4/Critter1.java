@@ -1,5 +1,10 @@
 package assignment4;
-
+/**
+ * This critter takes after a cat. It likes to sleep. 
+ * When sleeping, it does not lose energy
+ * When it is awake, it moves normally
+ * @author Chris 
+ * */
 public class Critter1 extends Critter{
 	
 	private int dir;
@@ -20,7 +25,13 @@ public class Critter1 extends Critter{
 	
 	@Override
 	public void doTimeStep() {
-		// TODO Auto-generated method stub
+		int percent = Critter.getRandomInt(100);
+		if(percent < 25){
+			return;
+		}
+		else{
+			walk(dir);
+		}
 		
 	}
 
