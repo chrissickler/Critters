@@ -44,33 +44,7 @@ public abstract class Critter {
 	
 	/* a one-character long string that visually depicts your critter in the ASCII interface */
 	public String toString() {
-		if(this instanceof Critter1) {
-			Critter1 critter = (Critter1) this;
-			return critter.toString();
-		}
-		else if(this instanceof Critter2) {
-			Critter2 critter = (Critter2) this;
-			return critter.toString();
-		}
-		else if(this instanceof Critter3) {
-			Critter3 critter = (Critter3) this;
-			return critter.toString();
-		}
-		else if(this instanceof Critter4) {
-			Critter4 critter = (Critter4) this;
-			return critter.toString();
-		}
-		else if(this instanceof Craig) {
-			Craig critter = (Craig) this;
-			return critter.toString();
-		}
-		else if(this instanceof Algae) {
-			Algae critter = (Algae) this;
-			return critter.toString();
-		}
-		else {
-			return null;
-		}		
+		return "";
 	}
 
 	private int energy = 0;
