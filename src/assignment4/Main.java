@@ -94,19 +94,37 @@ public class Main {
         	}
         	else if (input.equalsIgnoreCase("make")) {
         		String packageName = "assignment4.";
-        		String craig = "Craig";
-        		String algae = "Algae";
-        		try {
-        			for(int i = 0; i < 25; i++) {
-        				Critter.makeCritter(packageName+craig);
-        				for(int j = 0; j < 4; j++) {
-        					Critter.makeCritter(packageName+algae);
-        				}
+        		int numSteps = 1;
+        		if(kb.hasNext()){
+        			String name = kb.next();
+        			if(kb.hasNext()){
+        				input = kb.next();
+        				numSteps = Integer.parseInt(input);
         			}
-				} catch (InvalidCritterException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+        			try{
+        				for(int i = 0; i < numSteps; i++){
+        					Critter.makeCritter(packageName + name);
+            			}
+        			}catch(InvalidCritterException e){
+        				e.printStackTrace();
+        			}
+        			
+        		}else{
+        			String craig = "Craig";
+            		String algae = "Algae";
+            		try {
+            			for(int i = 0; i < 25; i++) {
+            				Critter.makeCritter(packageName+craig);
+            				for(int j = 0; j < 4; j++) {
+            					Critter.makeCritter(packageName+algae);
+            				}
+            			}
+    				} catch (InvalidCritterException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+        		}
+        		
         		
         		
         	}

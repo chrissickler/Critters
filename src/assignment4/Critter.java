@@ -140,11 +140,43 @@ public abstract class Critter {
 	 */
 	public static List<Critter> getInstances(String critter_class_name) throws InvalidCritterException {
 		List<Critter> result = new java.util.ArrayList<Critter>();
-		for(Critter i : CritterWorld.critterMap.keySet()) {
-			if(i.toString() == critter_class_name) { 	//FIXME
-				result.add(i);
+		Critter critter;
+		try{
+			Class c = Class.forName(critter_class_name);
+			String s = "";
+			try{
+				critter = (Critter1) c.newInstance();
+				s = critter.toString();
+			}catch(Exception e){}
+			try{
+				critter = (Critter2) c.newInstance();
+				s = critter.toString();
+			}catch(Exception e){}
+			try{
+				critter = (Critter3) c.newInstance();
+				s = critter.toString();
+			}catch(Exception e){}
+			try{
+				critter = (Critter4) c.newInstance();
+				s = critter.toString();
+			}catch(Exception e){}
+			try{
+				critter = (Craig) c.newInstance();
+				s = critter.toString();
+			}catch(Exception e){}
+			try{
+				critter = (Algae) c.newInstance();
+				s = critter.toString();
+			}catch(Exception e){}
+			for(Critter i : CritterWorld.critterMap.keySet()) {
+				if(i.toString() == s) { 	
+					result.add(i);
+				}
 			}
+		}catch(ClassNotFoundException e){
+			throw new InvalidCritterException(critter_class_name);
 		}
+		
 		return result;
 	}
 	
