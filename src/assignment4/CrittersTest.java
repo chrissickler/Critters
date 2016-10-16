@@ -36,16 +36,10 @@ public class CrittersTest {
 		
 		try {
 			CritterWorld.printWorld();
-			CritterWorld.doTimeStep();
-			CritterWorld.printWorld();
-			CritterWorld.doTimeStep();
-			CritterWorld.printWorld();
-			CritterWorld.doTimeStep();
-			CritterWorld.printWorld();
-			CritterWorld.doTimeStep();
-			CritterWorld.printWorld();
-			CritterWorld.doTimeStep();
-			CritterWorld.printWorld();
+			for(int i = 0; i < 10; i++){
+				CritterWorld.doTimeStep();
+				CritterWorld.printWorld();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

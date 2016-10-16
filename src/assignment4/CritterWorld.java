@@ -1,10 +1,13 @@
 package assignment4;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CritterWorld {
 	public static Map<Critter, Point> critterMap = new HashMap<Critter, Point>();	//official record of Critters and their location
+	public static List<Critter> babies = new ArrayList<>();
 	private static int width = Params.world_width;
 	private static int height = Params.world_height;
 	private static String[][] world = new String[width][height];	// for display purposes only
@@ -42,6 +45,7 @@ public class CritterWorld {
 		for(Critter i : critterMap.keySet()){
 			i.doTimeStep();
 		}
+		incorporateBabies();
 	}
 	
 	public static void doTimeSteps(int numSteps){
@@ -61,6 +65,12 @@ public class CritterWorld {
 		p.setX(numX);
 		p.setY(numY);
 		return p;
+	}
+	
+	public static void incorporateBabies() {
+		for(Critter i : babies) {
+			critterMap.put(i,getNextAvailableLocation());
+		}
 	}
 	
 	public static void clearWorld(){

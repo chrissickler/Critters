@@ -12,7 +12,6 @@
  */
 package assignment4;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /* see the PDF for descriptions of the methods and fields in this class
@@ -22,10 +21,7 @@ import java.util.List;
 
 
 public abstract class Critter {
-	private static String myPackage;
-	private	static List<Critter> population = new java.util.ArrayList<Critter>();
-	private static List<Critter> babies = new java.util.ArrayList<Critter>();
-	
+	private static String myPackage = "assignment4";
 
 	// Gets the package name.  This assumes that Critter and its subclasses are all in the same package.
 	static {
@@ -81,10 +77,11 @@ public abstract class Critter {
 	protected final void reproduce(Critter offspring, int direction) {
 		if(this.energy >= Params.min_reproduce_energy) {
 			this.energy/=2;
-			addCritter(offspring);
 			offspring.energy = this.energy;
+			CritterWorld.babies.add(offspring);
 		}
 	}
+	
 
 	public abstract void doTimeStep();
 	public abstract boolean fight(String oponent);	//can't have >1 critter on a given location
@@ -229,7 +226,7 @@ public abstract class Critter {
 		 * at either the beginning OR the end of every timestep.
 		 */
 		protected static List<Critter> getBabies() {
-			return babies;
+			return CritterWorld.babies;
 		}
 	}
 
