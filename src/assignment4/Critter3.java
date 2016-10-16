@@ -53,7 +53,7 @@ public class Critter3 extends Critter{
 		else if(activity < awake) {
 			walk(dir);
 		}
-		if(getEnergy() > 3*Params.start_energy/(2*Params.min_reproduce_energy)){
+		if(getEnergy() > 8*Params.start_energy/(Params.min_reproduce_energy)){
 			Critter3 newDonald = new Critter3();
 			newDonald.genes = this.genes;	//asexual reproduction
 			reproduce(newDonald, activity);

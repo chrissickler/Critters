@@ -1,36 +1,45 @@
 package assignment4;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CritterWorld {
-	public static ArrayList<Critter> critterList = new ArrayList<Critter>();
+	public static Map<Critter, Point> critterMap = new HashMap<Critter, Point>();	//official record of Critters and their location
 	private static int width = Params.world_width;
 	private static int height = Params.world_height;
-	private static String[][] world = new String[width][height];
+	private static String[][] world = new String[width][height];	// for display purposes only
 
-	public static void addCritter(Critter c) {
-		critterList.add(c);
+	public static void addCritter(Critter c, int x, int y) {
+		Point p = new Point(x,y);
+		critterMap.put(c, p);
 	}
 	
-	public static boolean checkOccupied(int x, int y){
-		if(world[x][y] == null){
-			return true;
-		}else {
-			return false;
+	/**
+	 * Checks all existing Critter locations for the current point
+	 * @param p
+	 * @return true if another critter has that same location
+	 */
+	public static boolean isOccupied(Point p){
+		for(Point i : critterMap.values()){
+			if(i.equals(p)) return true;
 		}
+		return false;
 	}
 	
+	/**
+	 * Removes all dead critters from the critterMap
+	 */
 	public static void removeDead(){
-		for(Critter i : CritterWorld.critterList){
+		for(Critter i : critterMap.keySet()){
 			if(i.getEnergy() == 0){
-				CritterWorld.critterList.remove(i);
+				CritterWorld.critterMap.remove(i);
 			}
 		}
 	}
 	
 	public static void doTimeStep(){
 		removeDead();
-		for(Critter i : CritterWorld.critterList){
+		for(Critter i : critterMap.keySet()){
 			i.doTimeStep();
 		}
 	}
@@ -56,10 +65,11 @@ public class CritterWorld {
 	
 	public static void clearWorld(){
 		world = new String[width][height];
-		critterList = new ArrayList<Critter>();
+		critterMap = new HashMap<Critter, Point>();
 	}
 	
 	public static void printWorld() {
+		cleanWorld();
 		String top = topBottomRow();		
 		StringBuilder sb = new StringBuilder();
 		sb.append(top);
@@ -86,7 +96,21 @@ public class CritterWorld {
 		for(int i = 0; i < width; i++) {
 			sb.append("-");
 		}
-		sb.append("+");
+		sb.append("+\n");
 		return sb.toString();
+	}
+	
+	/**
+	 * Guarantees that the String[][] world only displays live critters and accurate positions
+	 */
+	public static void cleanWorld() {
+		int x;
+		int y;
+		world = new String[width][height];		
+		for(Critter i : critterMap.keySet()){
+			x = critterMap.get(i).getX();
+			y = critterMap.get(i).getY();
+			world[x][y] = i.toString();
+		}
 	}
 }

@@ -4,6 +4,12 @@ public class Point {
 	private int x;
 	private int y;
 	public Point(){}
+	
+	public Point(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+	
 	public int getX() {
 		return x;
 	}
@@ -17,4 +23,12 @@ public class Point {
 		this.y = y;
 	}
 	
+	public boolean equals(Point o) {
+		if(this.x == o.x && this.y == o.y){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}	
 }

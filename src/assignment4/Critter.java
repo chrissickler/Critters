@@ -67,6 +67,8 @@ public abstract class Critter {
 		if(y_coord < 0){
 			y_coord += Params.world_height;
 		}
+		CritterWorld.critterMap.get(this).setX(x_coord);
+		CritterWorld.critterMap.get(this).setY(y_coord);
 	}
 	
 	protected final void run(int direction) {
@@ -79,13 +81,13 @@ public abstract class Critter {
 	protected final void reproduce(Critter offspring, int direction) {
 		if(this.energy >= Params.min_reproduce_energy) {
 			this.energy/=2;
-			offspring.energy = this.energy;
 			addCritter(offspring);
+			offspring.energy = this.energy;
 		}
 	}
 
 	public abstract void doTimeStep();
-	public abstract boolean fight(String oponent);
+	public abstract boolean fight(String oponent);	//can't have >1 critter on a given location
 	
 	/**
 	 * create and initialize a Critter subclass.
@@ -126,12 +128,13 @@ public abstract class Critter {
 		addCritter(critter);
 	}
 	
-	private static void addCritter(Critter critter) {
+	public static void addCritter(Critter critter) {
 		if(critter != null) {
 			Point p = CritterWorld.getNextAvailableLocation();
 			critter.x_coord = p.getX();
 			critter.y_coord = p.getY();
-			CritterWorld.addCritter(critter);
+			CritterWorld.addCritter(critter, critter.x_coord, critter.y_coord);
+			critter.energy = Params.start_energy;
 		}
 	}
 	
@@ -143,7 +146,7 @@ public abstract class Critter {
 	 */
 	public static List<Critter> getInstances(String critter_class_name) throws InvalidCritterException {
 		List<Critter> result = new java.util.ArrayList<Critter>();
-		for(Critter i : CritterWorld.critterList) {
+		for(Critter i : CritterWorld.critterMap.keySet()) {
 			if(i.toString() == critter_class_name) { 	//FIXME
 				result.add(i);
 			}
@@ -214,8 +217,9 @@ public abstract class Critter {
 		 * ArrayList that has been provided in the starter code.  In any case, it has to be
 		 * implemented for grading tests to work.
 		 */
+		@SuppressWarnings("unchecked")
 		protected static List<Critter> getPopulation() {
-			return CritterWorld.critterList;
+			return (List<Critter>) CritterWorld.critterMap.keySet();
 		}
 		
 		/*
