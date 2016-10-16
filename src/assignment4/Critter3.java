@@ -1,5 +1,7 @@
 package assignment4;
 
+import assignment4.Critter.TestCritter;
+
 /**
  * This Critter's name is Donald. He doesn't like being labeled as a number. He thinks its unfair.
  * This is unfair treatment. He has more money than any other critter who has ever been simulated.
@@ -8,7 +10,7 @@ package assignment4;
  *
  */
 
-public class Critter3 extends Critter{
+public class Critter3 extends TestCritter{
 	
 	@Override
 	public String toString(){ return "3";}

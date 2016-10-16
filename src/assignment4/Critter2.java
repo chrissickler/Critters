@@ -1,9 +1,12 @@
 package assignment4;
+
+import assignment4.Critter.TestCritter;
+
 /**
  * This Critter is actually 
  * @author Chris
  * */
-public class Critter2 extends Critter{
+public class Critter2 extends TestCritter{
 	
 	private int dir;
 	private int[] genes = new int[8];

@@ -1,9 +1,11 @@
 package assignment4;
 
+import assignment4.Critter.TestCritter;
+
 /*
  * Example critter
  */
-public class Critter4 extends Critter {
+public class Critter4 extends TestCritter {
 	
 	@Override
 	public String toString() { return "4"; }

@@ -1,11 +1,14 @@
 package assignment4;
+
+import assignment4.Critter.TestCritter;
+
 /**
  * This critter takes after a cat. It likes to sleep. 
  * When sleeping, it does not lose energy
  * When it is awake, it moves normally
  * @author Chris 
  * */
-public class Critter1 extends Critter{
+public class Critter1 extends TestCritter{
 	
 	private int dir;
 	private int[] genes = new int[8];
