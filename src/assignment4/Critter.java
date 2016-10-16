@@ -22,7 +22,8 @@ import java.util.List;
 
 public abstract class Critter {
 	private static String myPackage = "assignment4";
-
+	private Point location = new Point();
+	private boolean hasMoved = false;
 	// Gets the package name.  This assumes that Critter and its subclasses are all in the same package.
 	static {
 		myPackage = Critter.class.getPackage().toString().split(" ")[1];
@@ -48,37 +49,34 @@ public abstract class Critter {
 		return this.energy;
 	}
 	
-	private int x_coord;
-	private int y_coord;
+	//private int x_coord;
+	//private int y_coord;
 	protected final void walk(int direction) {
 		energy -= Params.walk_energy_cost;
-		direction = direction % 8;
-		if(direction > 4) y_coord = (y_coord + 1) % Params.world_height;
-		else if (direction < 4 && direction > 0 ) y_coord--;
-		if (direction == 7 || direction < 2) x_coord = (x_coord + 1) % Params.world_width;
-		else if (direction < 6 && direction > 2) x_coord --;
-		if(x_coord < 0){
-			x_coord += Params.world_width;
+		if (!hasMoved) {
+			direction = direction % 8;
+			location.update(direction);
+			hasMoved = true;
 		}
-		if(y_coord < 0){
-			y_coord += Params.world_height;
-		}
-		CritterWorld.critterMap.get(this).setX(x_coord);
-		CritterWorld.critterMap.get(this).setY(y_coord);
 	}
 	
 	protected final void run(int direction) {
-		walk(direction);
-		walk(direction);
-		energy += (2 * Params.walk_energy_cost);
 		energy -= Params.run_energy_cost;
+		if (!hasMoved) {
+			direction = direction % 8;
+			location.update(direction);
+			location.update(direction);
+			hasMoved = true;
+		}
 	}
 	
 	protected final void reproduce(Critter offspring, int direction) {
 		if(this.energy >= Params.min_reproduce_energy) {
-			this.energy/=2;
-			offspring.energy = this.energy;
-			CritterWorld.babies.add(offspring);
+			offspring.energy = this.energy/2;
+			this.energy += this.energy %2;
+			this.energy /= 2;
+			offspring.location.update(direction);
+			CritterWorld.babies.put(offspring, offspring.location);
 		}
 	}
 	
@@ -127,10 +125,8 @@ public abstract class Critter {
 	
 	public static void addCritter(Critter critter) {
 		if(critter != null) {
-			Point p = CritterWorld.getNextAvailableLocation();
-			critter.x_coord = p.getX();
-			critter.y_coord = p.getY();
-			CritterWorld.addCritter(critter, critter.x_coord, critter.y_coord);
+			critter.location = CritterWorld.getNextAvailableLocation();
+			CritterWorld.addCritter(critter, critter.location);
 			critter.energy = Params.start_energy;
 		}
 	}
@@ -193,19 +189,19 @@ public abstract class Critter {
 		}
 		
 		protected void setX_coord(int new_x_coord) {
-			super.x_coord = new_x_coord;
+			super.location.setX(new_x_coord);
 		}
 		
 		protected void setY_coord(int new_y_coord) {
-			super.y_coord = new_y_coord;
+			super.location.setY(new_y_coord);
 		}
 		
 		protected int getX_coord() {
-			return super.x_coord;
+			return super.location.getX();
 		}
 		
 		protected int getY_coord() {
-			return super.y_coord;
+			return super.location.getY();
 		}
 		
 
@@ -226,7 +222,7 @@ public abstract class Critter {
 		 * at either the beginning OR the end of every timestep.
 		 */
 		protected static List<Critter> getBabies() {
-			return CritterWorld.babies;
+			return (List<Critter>) CritterWorld.babies.keySet();
 		}
 	}
 
@@ -239,6 +235,7 @@ public abstract class Critter {
 	
 	public static void worldTimeStep() {
 		CritterWorld.doTimeStep();
+		
 	}
 	
 	public static void displayWorld() {
