@@ -21,7 +21,7 @@ import java.util.List;
 
 
 public abstract class Critter {
-	private static String myPackage = "assignment4";
+	private static String myPackage = "assignment4.";
 	private Point location = new Point();
 	private boolean hasMoved = false;
 	// Gets the package name.  This assumes that Critter and its subclasses are all in the same package.
@@ -31,6 +31,7 @@ public abstract class Critter {
 	
 	private static java.util.Random rand = new java.util.Random();
 	public static int getRandomInt(int max) {
+		if(max < 0) return 0;
 		return rand.nextInt(max);
 	}
 	
@@ -53,7 +54,7 @@ public abstract class Critter {
 	//private int y_coord;
 	protected final void walk(int direction) {
 		energy -= Params.walk_energy_cost;
-		if (!hasMoved) {
+		if (!hasMoved && energy > 0) {
 			direction = direction % 8;
 			location.update(direction);
 			hasMoved = true;
@@ -62,7 +63,7 @@ public abstract class Critter {
 	
 	protected final void run(int direction) {
 		energy -= Params.run_energy_cost;
-		if (!hasMoved) {
+		if (!hasMoved && energy > 0) {
 			direction = direction % 8;
 			location.update(direction);
 			location.update(direction);
@@ -235,11 +236,52 @@ public abstract class Critter {
 	
 	public static void worldTimeStep() {
 		CritterWorld.doTimeStep();
-		
+		handleInteractions();
+		CritterWorld.removeDead();
+		CritterWorld.makeAlgae();
+		CritterWorld.addBabies();
 	}
 	
 	public static void displayWorld() {
 		CritterWorld.printWorld();
+	}
+	
+	private static void handleInteractions(){
+		boolean aFight;
+		boolean bFight;
+		int aRoll = 0;
+		int bRoll = 0;
+		for(Critter a : CritterWorld.critterMap.keySet()) {
+			for(Critter b : CritterWorld.critterMap.keySet()) {
+				if(!a.equals(b)) {
+					if(CritterWorld.critterMap.get(a).equals(CritterWorld.critterMap.get(b))) {
+						aFight = a.fight(b.toString());
+						bFight = b.fight(a.toString());
+						if(aFight){
+							aRoll = Critter.getRandomInt(a.getEnergy());
+						}else{
+							aRoll = 0;
+						}
+						if(bFight){
+							bRoll = Critter.getRandomInt(b.getEnergy());
+						}else{
+							bRoll = 0;
+						}
+						if (bFight && aFight) {
+							if (aRoll > bRoll) {
+								a.energy += b.energy / 2;
+								b.energy = 0;
+								b.location = new Point(-1, -1);
+							} else {
+								b.energy += a.energy / 2;
+								a.energy = 0;
+								a.location = new Point(-1, -1);
+							} 
+						}
+					}
+				}
+			}
+		}
 	}
 	
 }

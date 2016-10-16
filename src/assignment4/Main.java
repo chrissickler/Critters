@@ -84,11 +84,13 @@ public class Main {
         		{
         			input = kb.next();
         			numSteps = Integer.parseInt(input);        			
-        		}        		
-        		CritterWorld.doTimeSteps(numSteps);
+        		}
+        		for(int i = 0; i < numSteps; i++){
+        			Critter.worldTimeStep();
+        		}
         	}
         	else if (input.equalsIgnoreCase("seed")) {
-        		//TODO: STAGE 2
+        		Critter.setSeed(Long.parseLong(args[1]));
         	}
         	else if (input.equalsIgnoreCase("make")) {
         		String packageName = "assignment4.";

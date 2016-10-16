@@ -56,7 +56,9 @@ public class Critter2 extends Critter{
 
 	@Override
 	public boolean fight(String opponent) {
-		// TODO Auto-generated method stub
+		if(opponent.equals("@")){
+			return true;
+		}
 		return false;
 	}
 

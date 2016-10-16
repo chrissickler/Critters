@@ -19,7 +19,13 @@ public class Critter4 extends Critter {
 		dir = Critter.getRandomInt(8);
 	}
 	
-	public boolean fight(String not_used) { return true; }
+	public boolean fight(String opponent) {
+		if(opponent.equals("@")){
+			return true;
+		}
+		
+		return true;
+	}
 
 	@Override
 	public void doTimeStep() {

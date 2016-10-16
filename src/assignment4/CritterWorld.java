@@ -11,7 +11,7 @@ public class CritterWorld {
 	private static String[][] world = new String[width][height];	// for display purposes only
 
 	public static void addCritter(Critter c, Point p) {
-		critterMap.put(c, p);
+		babies.put(c, p);
 	}
 	
 	/**
@@ -19,10 +19,32 @@ public class CritterWorld {
 	 * @param p
 	 * @return true if another critter has that same location
 	 */
-	public static boolean isOccupied(Point p){
-		for(Point i : critterMap.values()){
-			if(i.equals(p)) return true;
+	public static boolean isOccupied(Critter me, Point p){
+		for(Critter i : critterMap.keySet()){
+			if(critterMap.get(i).equals(p)) {
+				if(i.equals(me)) continue;
+				else return true;
+			}
 		}
+		return false;
+	}
+	
+	public static void makeAlgae() {
+		for(int i = 0; i < Params.refresh_algae_count; i++) {
+			babies.put(new Algae(), new Point(Critter.getRandomInt(Params.world_width), Critter.getRandomInt(Params.world_height)));
+		}
+	}
+	
+	public static boolean tryMove(Critter c, int direction, int distance) {
+		Point p1 = critterMap.get(c);
+		if(distance == 1) {
+			c.walk(direction);
+		}
+		else if(distance == 2) {
+			c.run(direction);
+		}
+		Point p2 = critterMap.get(c);
+		if(p1.equals(p2))return true;
 		return false;
 	}
 	
@@ -38,17 +60,10 @@ public class CritterWorld {
 	}
 	
 	public static void doTimeStep(){
-		removeDead();
 		for(Critter i : critterMap.keySet()){
 			i.doTimeStep();
 		}
-		incorporateBabies();
-	}
-	
-	public static void doTimeSteps(int numSteps){
-		for(int i = 0; i < numSteps; i++) {
-	 		doTimeStep();
-		}
+		addBabies();
 	}
 	
 	public static Point getNextAvailableLocation(){
@@ -64,7 +79,7 @@ public class CritterWorld {
 		return p;
 	}
 	
-	public static void incorporateBabies() {
+	public static void addBabies() {
 		critterMap.putAll(babies);
 	}
 	
@@ -118,4 +133,5 @@ public class CritterWorld {
 			world[x][y] = i.toString();
 		}
 	}
+	
 }
