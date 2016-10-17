@@ -72,6 +72,7 @@ public class Main {
         /* Write your code below. */
         String input;
         while(true) {
+        	System.out.println("critters> ");
         	input = kb.next();
         	if(input.equalsIgnoreCase("quit")) {//DONE
         		break;
@@ -90,7 +91,7 @@ public class Main {
         			Critter.worldTimeStep();
         		}
         	}
-        	else if (input.equalsIgnoreCase("seed")) {//DONE
+        	else if (input.equalsIgnoreCase("seed")) {//NOT DONE
         		Critter.setSeed(Long.parseLong(args[1]));
         	}
         	else if (input.equalsIgnoreCase("make")) {//DONE
@@ -162,7 +163,8 @@ public class Main {
         		//TODO: STAGE 3
         	}
         	else {
-        		throw new InvalidInputError();//TODO: INVALID INPUT
+        		System.out.println("Invalid command: " + input);
+        		//throw new InvalidInputError();//TODO: INVALID INPUT
         	}
         }
         /* Write your code above */

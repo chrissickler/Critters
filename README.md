@@ -9,16 +9,15 @@ For Sunday
 	-From what I can tell, I don't think we need to override 		the Critter.runStats
 	-Needs testing
 2. Main flags - Chris
-	-Need to fix stats still
+	-Need to fix stats still 
+	-seed is taking input only from input string array
 3. Exceptions & Errors - Chris
 	-Needs implementing
 4. Comment Everything - C&K
 	-Chris needs this
 5. System Tests - Karl
 6. We cannot hard code search through a list of known critters. Its in the FAQ for assignment4. So these probably need some editting:
-	-C.makeCritter
 	-M.stats
-	-C.getInstances
 	(I realize I did all this LOL - Chris)
 
 From Piazza

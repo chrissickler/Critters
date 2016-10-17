@@ -21,7 +21,7 @@ public class CrittersTest {
 	public void tearDown() throws Exception {
 	}
 
-	//@Test
+	@Test
 	public void testAddCritter() {
 		Craig c = new Craig();
 		Critter.addCritter(c);
@@ -47,10 +47,12 @@ public class CrittersTest {
 	}
 	
 	//@Test
-	public void testCraigRunStats() {
+	public void testRunStats() {
 		for(int i = 0; i < 3;i++){
 			Craig c = new Craig();
 			Critter.addCritter(c);
+			Critter1 c1 = new Critter1();
+			Critter.addCritter(c1);
 		}
 		
 		try{
@@ -58,6 +60,7 @@ public class CrittersTest {
 			for(int i = 0; i < 10; i++){
 				CritterWorld.doTimeStep();
 				Craig.runStats(Critter.getInstances("assignment4.Craig"));
+				Critter1.runStats(Critter.getInstances("assignment4.Critter1"));
 				CritterWorld.printWorld();
 			}
 		}catch(Exception e){
@@ -65,23 +68,5 @@ public class CrittersTest {
 		}
 		
 	}
-	@Test
-	public void testCritter1RunStats() {
-		for(int i = 0; i < 2;i++){
-			Critter1 c = new Critter1();
-			Critter.addCritter(c);
-		}
-		
-		try{
-			CritterWorld.printWorld();
-			for(int i = 0; i < 5; i++){
-				CritterWorld.doTimeStep();
-				Critter.runStats(Critter.getInstances("assignment4.Critter1"));
-				CritterWorld.printWorld();
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}
+
 }
