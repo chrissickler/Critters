@@ -12,6 +12,8 @@
  */
 package assignment4;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /* see the PDF for descriptions of the methods and fields in this class
@@ -95,30 +97,16 @@ public abstract class Critter {
 	 * @param critter_class_name
 	 * @throws InvalidCritterException
 	 */	
-	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
+	public static void makeCritter(String critter_class_name) throws InvalidCritterException{
 		//TODO need to go over this
 		Critter critter = null;
 		try{
-			Class c = Class.forName(critter_class_name);				
-			try{
-				critter = (Critter1) c.newInstance();
-			}catch(Exception e){}
-			try{
-				critter = (Critter2) c.newInstance();
-			}catch(Exception e){}
-			try{
-				critter = (Critter3) c.newInstance();
-			}catch(Exception e){}
-			try{
-				critter = (Critter4) c.newInstance();
-			}catch(Exception e){}
-			try{
-				critter = (Craig) c.newInstance();
-			}catch(Exception e){}
-			try{
-				critter = (Algae) c.newInstance();
-			}catch(Exception e){}
-		}catch(ClassNotFoundException e){
+			Class<?> c = Class.forName(critter_class_name);
+			Constructor<?> newCon = c.getConstructor();
+			Object obj = newCon.newInstance();
+			critter = (Critter)obj;
+			
+		}catch(ClassNotFoundException|NoSuchMethodException|SecurityException|InstantiationException|IllegalAccessException|IllegalArgumentException|InvocationTargetException e){
 			throw new InvalidCritterException(critter_class_name);
 		}
 		addCritter(critter);
@@ -142,38 +130,18 @@ public abstract class Critter {
 		List<Critter> result = new java.util.ArrayList<Critter>();
 		Critter critter;
 		try{
-			Class c = Class.forName(critter_class_name);
-			String s = "";
-			try{
-				critter = (Critter1) c.newInstance();
-				s = critter.toString();
-			}catch(Exception e){}
-			try{
-				critter = (Critter2) c.newInstance();
-				s = critter.toString();
-			}catch(Exception e){}
-			try{
-				critter = (Critter3) c.newInstance();
-				s = critter.toString();
-			}catch(Exception e){}
-			try{
-				critter = (Critter4) c.newInstance();
-				s = critter.toString();
-			}catch(Exception e){}
-			try{
-				critter = (Craig) c.newInstance();
-				s = critter.toString();
-			}catch(Exception e){}
-			try{
-				critter = (Algae) c.newInstance();
-				s = critter.toString();
-			}catch(Exception e){}
+			Class<?> c = Class.forName(critter_class_name);
+			Constructor<?> newCon = c.getConstructor();
+			Object obj = newCon.newInstance();
+			critter = (Critter)obj;
+			String s = critter.toString();
+			
 			for(Critter i : CritterWorld.critterMap.keySet()) {
 				if(i.toString() == s) { 	
 					result.add(i);
 				}
 			}
-		}catch(ClassNotFoundException e){
+		}catch(ClassNotFoundException|NoSuchMethodException|SecurityException|InstantiationException|IllegalAccessException|IllegalArgumentException|InvocationTargetException e){
 			throw new InvalidCritterException(critter_class_name);
 		}
 		
