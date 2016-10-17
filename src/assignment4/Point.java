@@ -47,5 +47,5 @@ public class Point {
 		else {
 			return false;
 		}
-	}	
+	}
 }

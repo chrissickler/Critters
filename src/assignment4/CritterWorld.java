@@ -67,6 +67,11 @@ public class CritterWorld {
 		addBabies();
 	}
 	
+	/**
+	 * Calculate the next available location 
+	 * FIXME: May not be legal to use
+	 * @return next unoccupied location
+	 */
 	public static Point getNextAvailableLocation(){
 		int numX = Critter.getRandomInt(width);
 		int numY = Critter.getRandomInt(height);
@@ -74,22 +79,38 @@ public class CritterWorld {
 			numX = Critter.getRandomInt(width);
 			numY = Critter.getRandomInt(height);
 		}
-		Point p = new Point();
-		p.setX(numX);
-		p.setY(numY);
-		return p;
+		return new Point(numX, numY);
 	}
 	
+	/**
+	 * Get random location on map to put newly generated Critter via Make Critter
+	 * @return random point location on the world map
+	 */
+	public static Point getRandomLocation() {
+		int x = Critter.getRandomInt(width);
+		int y = Critter.getRandomInt(height);
+		return new Point(x,y);
+	}
+	
+	/**
+	 * At the end of the world time step add babies to the world map
+	 */
 	public static void addBabies() {
 		critterMap.putAll(babies);
 		babies = new HashMap<>();
 	}
 	
+	/**
+	 * Deletes all world data
+	 */
 	public static void clearWorld(){
 		world = new String[width][height];
 		critterMap = new HashMap<Critter, Point>();
 	}
 	
+	/**
+	 * Prints world to System.out
+	 */
 	public static void printWorld() {
 		cleanWorld();
 		String top = topBottomRow();		
@@ -112,6 +133,10 @@ public class CritterWorld {
 		System.out.println(sb.toString());
 	}
 	
+	/**
+	 * Returns the top/bottom borders of the world
+	 * @return Top and bottom row borders
+	 */
 	private static String topBottomRow() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("+");
@@ -134,6 +159,5 @@ public class CritterWorld {
 			y = critterMap.get(i).getY();
 			world[x][y] = i.toString();
 		}
-	}
-	
+	}	
 }

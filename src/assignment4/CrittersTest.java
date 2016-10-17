@@ -63,6 +63,16 @@ public class CrittersTest {
 		Critter.displayWorld();	// no craig
 	}
 	
+	@Test
+	public void testClearWorld(){
+		try {
+			Main.main(new String[] {"make", "Critter1"});
+		} catch (InvalidInputError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	//@Test
 	public void testRunStats() {
 		for(int i = 0; i < 3;i++){

@@ -114,7 +114,7 @@ public abstract class Critter {
 	
 	public static void addCritter(Critter critter) {
 		if(critter != null) {
-			critter.location = CritterWorld.getNextAvailableLocation();
+			critter.location = CritterWorld.getRandomLocation();
 			CritterWorld.addCritter(critter, critter.location);
 			critter.energy = Params.start_energy;
 		}
