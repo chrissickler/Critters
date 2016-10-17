@@ -21,7 +21,7 @@ public class CrittersTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+	//@Test
 	public void testAddCritter() {
 		Craig c = new Craig();
 		Critter.addCritter(c);
@@ -42,8 +42,25 @@ public class CrittersTest {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}		
+	}
+	
+	@Test // VERIFIES MAKE CRITTER && REMOVE
+	public void testRemoveCritter() {
+		Craig c = new Craig();
+		Critter.addCritter(c);
+		try {
+			Critter.makeCritter("assignment4.Craig");
+		} catch (InvalidCritterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
+		Critter.displayWorld();	// empty
+		Critter.worldTimeStep();
+		Critter.displayWorld();	// added craig
+		c.setEnergy(0);
+		Critter.worldTimeStep(); // remove craig
+		Critter.displayWorld();	// no craig
 	}
 	
 	//@Test

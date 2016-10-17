@@ -2,6 +2,7 @@ package assignment4;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CritterWorld {
 	public static Map<Critter, Point> critterMap = new HashMap<Critter, Point>();	//official record of Critters and their location
@@ -53,8 +54,8 @@ public class CritterWorld {
 	 */
 	public static void removeDead(){
 		for(Critter i : critterMap.keySet()){
-			if(i.getEnergy() == 0){
-				CritterWorld.critterMap.remove(i);
+			if(i.getEnergy() <= 0){
+				critterMap.remove(i);
 			}
 		}
 	}
@@ -81,6 +82,7 @@ public class CritterWorld {
 	
 	public static void addBabies() {
 		critterMap.putAll(babies);
+		babies = new HashMap<>();
 	}
 	
 	public static void clearWorld(){
