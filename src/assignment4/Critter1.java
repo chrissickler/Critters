@@ -3,9 +3,16 @@ package assignment4;
 import assignment4.Critter.TestCritter;
 
 /**
- * This critter takes after a cat. It likes to sleep. 
- * When sleeping, it does not lose energy
- * When it is awake, it moves normally
+ * This critter takes after a cat.  
+ * It spends its days as follows:
+ * 18 hours a day sleeping
+ * 5 hours looking for food (a.k.a. walking)
+ * 1 hour playing (a.k.a. running)
+ * The initial cats genes are random.
+ * Any kittens will have the same genes as parent
+ * Genes decide what direction the cat will move when it wakes up
+ * When 2 cats fight, both cats become pregnant 
+ * So, when the cat reaches the minimum energy, the kittens will be born
  * @author Chris 
  * */
 public class Critter1 extends TestCritter{
@@ -14,6 +21,11 @@ public class Critter1 extends TestCritter{
 	private int[] genes = new int[8];
 	private boolean isPregnant;
 	private boolean isAwake;
+	private static final int playing = 1;
+	private static final int lookingForFood = 5;
+	private static final int sleeping = 18;
+	
+	private static final int awake = playing + lookingForFood;
 	
 	public Critter1(){
 		for(int i = 0; i < 8; i++){
@@ -21,6 +33,7 @@ public class Critter1 extends TestCritter{
 		}
 		isPregnant = false;
 		isAwake = true;
+		dir = Critter.getRandomInt(8);
 	}
 
 	public int getDir() {
@@ -35,39 +48,65 @@ public class Critter1 extends TestCritter{
 		return "1";
 	}
 	
+	/**
+	 *First we must see if the cat is asleep
+	 *If it is, then we must determine if it wakes up.
+	 * - If it doesn't wake up, then it does nothing this turn
+	 * - If it does, then it chooses a new direction
+	 *If it is awake,
+	 * - It will either look for food
+	 * 		- walking in random directions
+	 * - or play
+	 * 		- running in the set direction
+	 *Now we must check to see if the cat is pregnant
+	 * - If it isn't, nothing happens
+	 * - If it is,
+	 * 		- Checks to see if enough energy to have kittens
+	 * 		- if enough, kittens are had
+	 * 		- if not, then stays pregnant until it can reproduce safely
+	 */
 	@Override
 	public void doTimeStep() {
-		int percent = Critter.getRandomInt(100);
-		if(percent > 30){
-			isAwake = false;
-			return;//The cat/critter is asleep because its a cat
+		if(!isAwake){//Is the cat asleep?
+			isAwake = willWakeUp();//Will it wake up?
+			if(isAwake){//Wakes up and gets new direction from genes
+				dir = getDirection();
+			}
 		}
-		else{
-			isAwake = true;
-			if(percent < 15){
-				walk(dir);			
-				dir = genes[Critter.getRandomInt(8)];
-				if(getEnergy() > (8*Params.min_reproduce_energy) && isPregnant == true){
-					int numKittens = Critter.getRandomInt(3);
-					for(int i = 0; i < numKittens; i++){					
-						Critter1 kitten = new Critter1();
-						for(int k = 0; k < 8; k++){
-							kitten.genes[k] = (this.genes[k] * 2) / 2;
-						}
-						reproduce(kitten, Critter.getRandomInt(8));					
-						isPregnant = false;
-					}
+		if(isAwake){//Cat either is awake or just woke up
+			int num = Critter.getRandomInt(awake);
+			if(num < lookingForFood){
+				//cat will look for food in random directions
+				walk(dir);
+				dir = Critter.getRandomInt(8);
+			}else{
+				//cat will play in a set direction
+				run(dir);
+			}
+		}
+		if(isPregnant){
+			if(getEnergy() > (8*Params.min_reproduce_energy)){
+				int numKittens = Critter.getRandomInt(3);
+				for(int i = 0; i < numKittens; i++){					
+					Critter1 kitten = new Critter1();
+					kitten.genes = this.genes;
+					reproduce(kitten, Critter.getRandomInt(8));
 				}
 			}
-			else{
-				run(dir);
-				dir = genes[Critter.getRandomInt(8)];
-			}
 		}
-		
-		
 	}
-
+	
+	private boolean willWakeUp(){
+		int num = Critter.getRandomInt(24);
+		if(num > sleeping){
+			return true;
+		}
+		else return false;
+	}
+	
+	private int getDirection(){
+		return genes[Critter.getRandomInt(8)];
+	}
 	/**
 	 * If the cat is woken up, it will fight
 	 * else
@@ -81,7 +120,7 @@ public class Critter1 extends TestCritter{
 			return CritterWorld.tryMove(this,dir, 1);
 		}
 		else if(opponent.equals("@")){
-			return false;
+			return true;
 		}
 		else if(!isAwake){
 			isAwake = true;
@@ -95,8 +134,4 @@ public class Critter1 extends TestCritter{
 			}
 		}		
 	}
-	public static void runStats(java.util.List<Critter> craigs){
-		
-	}
-
 }

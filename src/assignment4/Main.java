@@ -73,13 +73,13 @@ public class Main {
         String input;
         while(true) {
         	input = kb.next();
-        	if(input.equalsIgnoreCase("quit")) {
+        	if(input.equalsIgnoreCase("quit")) {//DONE
         		break;
         	}
-        	else if (input.equalsIgnoreCase("show")) {
+        	else if (input.equalsIgnoreCase("show")) {//DONE
         		Critter.displayWorld();        		
         	}
-        	else if (input.equalsIgnoreCase("step")) {
+        	else if (input.equalsIgnoreCase("step")) {//DONE
         		int numSteps = 1;
         		if(kb.hasNextInt())
         		{
@@ -90,20 +90,20 @@ public class Main {
         			Critter.worldTimeStep();
         		}
         	}
-        	else if (input.equalsIgnoreCase("seed")) {
+        	else if (input.equalsIgnoreCase("seed")) {//DONE
         		Critter.setSeed(Long.parseLong(args[1]));
         	}
-        	else if (input.equalsIgnoreCase("make")) {
+        	else if (input.equalsIgnoreCase("make")) {//DONE
         		String packageName = "assignment4.";
-        		int numSteps = 1;
+        		int numMake = 1;
         		if(kb.hasNext()){
         			String name = kb.next();
         			if(kb.hasNext()){
         				input = kb.next();
-        				numSteps = Integer.parseInt(input);
+        				numMake = Integer.parseInt(input);
         			}
         			try{
-        				for(int i = 0; i < numSteps; i++){
+        				for(int i = 0; i < numMake; i++){
         					Critter.makeCritter(packageName + name);
             			}
         			}catch(InvalidCritterException e){
@@ -129,7 +129,7 @@ public class Main {
         		
         		
         	}
-        	else if (input.equalsIgnoreCase("stats")) {
+        	else if (input.equalsIgnoreCase("stats")) {//DONE
         		String packageName = "assignment4.";
         		if(kb.hasNext()){
         			String name = kb.next();
@@ -155,7 +155,7 @@ public class Main {
 							Algae.runStats(list);
         				}
         			}catch(Exception e){
-        				e.printStackTrace();
+        				System.out.println("error processing " + name);
         			}
         		}
         		
