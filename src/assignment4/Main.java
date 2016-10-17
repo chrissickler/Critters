@@ -11,6 +11,7 @@
  * Fall 2016
  */
 package assignment4; // cannot be in default package
+import java.util.List;
 import java.util.Scanner;
 import java.io.*;
 
@@ -129,6 +130,35 @@ public class Main {
         		
         	}
         	else if (input.equalsIgnoreCase("stats")) {
+        		String packageName = "assignment4.";
+        		if(kb.hasNext()){
+        			String name = kb.next();
+        			try{
+        				List <Critter> list = Critter.getInstances(packageName + name);
+        				
+        				if(list.get(0) instanceof Critter1){
+        					Critter1.runStats(list);
+        				}
+        				if(list.get(0) instanceof Critter2){
+        					Critter2.runStats(list);
+        				}
+        				if(list.get(0) instanceof Critter3){
+        					Critter3.runStats(list);
+        				}
+        				if(list.get(0) instanceof Critter4){
+        					Critter4.runStats(list);
+        				}
+						if(list.get(0) instanceof Craig){
+							Craig.runStats(list);
+						}
+						if(list.get(0) instanceof Algae){
+							Algae.runStats(list);
+        				}
+        			}catch(Exception e){
+        				e.printStackTrace();
+        			}
+        		}
+        		
         		//TODO: STAGE 3
         	}
         	else {

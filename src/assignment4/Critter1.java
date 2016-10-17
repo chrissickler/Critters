@@ -95,5 +95,8 @@ public class Critter1 extends TestCritter{
 			}
 		}		
 	}
+	public static void runStats(java.util.List<Critter> craigs){
+		
+	}
 
 }

@@ -64,5 +64,8 @@ public class Critter2 extends TestCritter{
 		}
 		return false;
 	}
-
+	
+	public static void runStats(java.util.List<Critter> craigs){
+		
+	}
 }
