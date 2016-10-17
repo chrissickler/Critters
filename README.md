@@ -3,11 +3,13 @@
 For Sunday
 00. Make all Critters extend TestCritter and do method tests - Karl
 0. General Stats Method - Chris
-	-Needs testing
+	-UMM I dont think there is anything to do unless we want 		to output more stats or want to override this in each 		critter class
 1. Implement all Critters (fight, runStats, etc. if not yet done) - C&K
+	-Finished Critters 1 and 2
+	-From what I can tell, I don't think we need to override 		the Critter.runStats
 	-Needs testing
 2. Main flags - Chris
-	-Needs testing
+	-Need to fix stats still
 3. Exceptions & Errors - Chris
 	-Needs implementing
 4. Comment Everything - C&K
