@@ -4,15 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import assignment4.Critter.TestCritter;
+
 public class CritterWorld {
-	public static Map<Critter, Point> critterMap = new HashMap<Critter, Point>();	//official record of Critters and their location
-	public static Map<Critter, Point> babies = new HashMap<>();
+	public static Map<TestCritter, Point> critterMap = new ConcurrentHashMap<TestCritter, Point>();	//official record of Critters and their location
+	public static Map<TestCritter, Point> babies = new HashMap<>();
 	private static int width = Params.world_width;
 	private static int height = Params.world_height;
 	private static String[][] world = new String[width][height];	// for display purposes only
 
 	public static void addCritter(Critter c, Point p) {
-		babies.put(c, p);
+		babies.put((TestCritter) c, p);
 	}
 	
 	/**
@@ -32,7 +34,7 @@ public class CritterWorld {
 	
 	public static void makeAlgae() {
 		for(int i = 0; i < Params.refresh_algae_count; i++) {
-			babies.put(new Algae(), new Point(Critter.getRandomInt(Params.world_width), Critter.getRandomInt(Params.world_height)));
+			Critter.addCritter(new Algae());
 		}
 	}
 	
@@ -105,7 +107,7 @@ public class CritterWorld {
 	 */
 	public static void clearWorld(){
 		world = new String[width][height];
-		critterMap = new HashMap<Critter, Point>();
+		critterMap = new HashMap<TestCritter, Point>();
 	}
 	
 	/**

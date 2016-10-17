@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import assignment4.Critter.TestCritter;
+
 public class CrittersTest {
 
 	@BeforeClass
@@ -45,7 +47,7 @@ public class CrittersTest {
 		}		
 	}
 	
-	@Test // VERIFIES MAKE CRITTER && REMOVE
+	//@Test // VERIFIES MAKE CRITTER && REMOVE
 	public void testRemoveCritter() {
 		Craig c = new Craig();
 		Critter.addCritter(c);
@@ -64,13 +66,29 @@ public class CrittersTest {
 	}
 	
 	@Test
-	public void testClearWorld(){
+	public void testFightCritter(){
+		int numCritters = 10;
 		try {
-			Main.main(new String[] {"make", "Critter1"});
-		} catch (InvalidInputError e) {
+			for(int i = 0; i < numCritters; i++) {
+				Critter.makeCritter("assignment4.Critter1");
+				Critter.makeCritter("assignment4.Critter2");
+				Critter.makeCritter("assignment4.Critter3");
+				Critter.makeCritter("assignment4.Critter4");
+			}
+		} catch (InvalidCritterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		int numCrittersBefore = CritterWorld.babies.keySet().size();
+		Critter.worldTimeStep();
+		for(TestCritter i : CritterWorld.critterMap.keySet()){
+			i.setX_coord(0);
+			i.setY_coord(0);
+		}
+		Critter.worldTimeStep();
+		int numCrittersAfter = CritterWorld.critterMap.keySet().size();
+		assertTrue(numCrittersBefore == numCritters*4);
+		assertTrue(numCrittersAfter < numCrittersBefore);
 	}
 	
 	//@Test

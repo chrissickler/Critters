@@ -99,7 +99,7 @@ public class Main {
         		int numMake = 1;
         		if(kb.hasNext()){
         			String name = kb.next();
-        			if(kb.hasNext()){
+        			if(kb.hasNextInt()){
         				input = kb.next();
         				numMake = Integer.parseInt(input);
         			}
@@ -140,19 +140,19 @@ public class Main {
         				if(list.get(0) instanceof Critter1){
         					Critter1.runStats(list);
         				}
-        				if(list.get(0) instanceof Critter2){
+        				else if(list.get(0) instanceof Critter2){
         					Critter2.runStats(list);
         				}
-        				if(list.get(0) instanceof Critter3){
+        				else if(list.get(0) instanceof Critter3){
         					Critter3.runStats(list);
         				}
-        				if(list.get(0) instanceof Critter4){
+        				else if(list.get(0) instanceof Critter4){
         					Critter4.runStats(list);
         				}
-						if(list.get(0) instanceof Craig){
+        				else if(list.get(0) instanceof Craig){
 							Craig.runStats(list);
 						}
-						if(list.get(0) instanceof Algae){
+        				else if(list.get(0) instanceof Algae){
 							Algae.runStats(list);
         				}
         			}catch(Exception e){

@@ -33,7 +33,7 @@ public abstract class Critter {
 	
 	private static java.util.Random rand = new java.util.Random();
 	public static int getRandomInt(int max) {
-		if(max < 0) return 0;
+		if(max <= 0) return 0;
 		return rand.nextInt(max);
 	}
 	
@@ -79,7 +79,7 @@ public abstract class Critter {
 			this.energy += this.energy %2;
 			this.energy /= 2;
 			offspring.location.update(direction);
-			CritterWorld.babies.put(offspring, offspring.location);
+			CritterWorld.babies.put((TestCritter) offspring, offspring.location);
 		}
 	}
 	
@@ -213,7 +213,7 @@ public abstract class Critter {
 		 */
 		@SuppressWarnings("unchecked")
 		protected static List<Critter> getPopulation() {
-			return (List<Critter>) CritterWorld.critterMap.keySet();
+			return (List<Critter>) (Critter) CritterWorld.critterMap.keySet();
 		}
 		
 		/*
@@ -223,7 +223,7 @@ public abstract class Critter {
 		 * at either the beginning OR the end of every timestep.
 		 */
 		protected static List<Critter> getBabies() {
-			return (List<Critter>) CritterWorld.babies.keySet();
+			return (List<Critter>) (Critter) CritterWorld.babies.keySet();
 		}
 	}
 
@@ -237,9 +237,9 @@ public abstract class Critter {
 	public static void worldTimeStep() {
 		CritterWorld.doTimeStep();
 		handleInteractions();
-		CritterWorld.removeDead();
 		CritterWorld.makeAlgae();
 		CritterWorld.addBabies();
+		CritterWorld.removeDead();
 	}
 	
 	public static void displayWorld() {
@@ -254,7 +254,7 @@ public abstract class Critter {
 		for(Critter a : CritterWorld.critterMap.keySet()) {
 			for(Critter b : CritterWorld.critterMap.keySet()) {
 				if(!a.equals(b)) {
-					if(CritterWorld.critterMap.get(a).equals(CritterWorld.critterMap.get(b))) {
+					if(a.location.equals(b.location)) {
 						aFight = a.fight(b.toString());
 						bFight = b.fight(a.toString());
 						if(aFight){
@@ -267,7 +267,7 @@ public abstract class Critter {
 						}else{
 							bRoll = 0;
 						}
-						if (bFight && aFight) {
+						if (a.location.equals(b.location)) {	// neither moved
 							if (aRoll > bRoll) {
 								a.energy += b.energy / 2;
 								b.energy = 0;
