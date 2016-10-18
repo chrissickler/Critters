@@ -82,17 +82,25 @@ public class Main {
         	}
         	else if (input.equalsIgnoreCase("step")) {//DONE
         		int numSteps = 1;
-        		if(kb.hasNextInt())
-        		{
-        			input = kb.next();
-        			numSteps = Integer.parseInt(input);        			
-        		}
-        		for(int i = 0; i < numSteps; i++){
-        			Critter.worldTimeStep();
-        		}
+        		input = kb.next();
+        		try {										
+					numSteps = Integer.parseInt(input);        			
+					for(int i = 0; i < numSteps; i++){
+						Critter.worldTimeStep();
+					}
+				} catch (NumberFormatException e) {
+					printError(input);
+				}
         	}
-        	else if (input.equalsIgnoreCase("seed")) {//NOT DONE
-        		Critter.setSeed(Long.parseLong(args[1]));
+        	else if (input.equalsIgnoreCase("seed")) {//DONE
+        		String s = kb.next();
+        		try{
+        			Long l = Long.parseLong(s);
+        			Critter.setSeed(l);
+        		}catch(NumberFormatException e){
+        			printError(s);
+        		}
+        		
         	}
         	else if (input.equalsIgnoreCase("make")) {//DONE
         		String packageName = "assignment4.";
@@ -108,7 +116,7 @@ public class Main {
         					Critter.makeCritter(packageName + name);
             			}
         			}catch(InvalidCritterException e){
-        				e.printStackTrace();
+        				printError(input);
         			}
         			
         		}else{
@@ -130,7 +138,7 @@ public class Main {
         		
         		
         	}
-        	else if (input.equalsIgnoreCase("stats")) {//DONE
+        	else if (input.equalsIgnoreCase("stats")) {//DONE-ISH
         		String packageName = "assignment4.";
         		if(kb.hasNext()){
         			String name = kb.next();
@@ -170,5 +178,8 @@ public class Main {
         /* Write your code above */
         System.out.flush();
 
+    }
+    public static void printError(String s){
+    	System.out.println("error processing: " + s);
     }
 }
