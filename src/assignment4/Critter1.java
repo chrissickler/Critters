@@ -92,6 +92,7 @@ public class Critter1 extends TestCritter{
 					kitten.genes = this.genes;
 					reproduce(kitten, Critter.getRandomInt(8));
 				}
+				isPregnant = false;
 			}
 		}
 	}
@@ -112,6 +113,8 @@ public class Critter1 extends TestCritter{
 	 * else
 	 * if the cat is pregnant, itll try to avoid fighting
 	 * but if not pregnant, it will just fight
+	 * @param opponent is the toString of the opponent, so if there are special interactions, you can code them
+	 * @return 
 	 */
 	@Override
 	public boolean fight(String opponent) {
