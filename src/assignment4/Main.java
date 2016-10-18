@@ -74,53 +74,54 @@ public class Main {
         String input;
         while(true) {
         	System.out.println("critters> ");
-        	input = kb.next();
+        	input = kb.next();//input string for reading
         	if(input.equalsIgnoreCase("quit")) {//DONE
-        		break;
+        		break;//breaking the loop and ending the program
         	}
         	else if (input.equalsIgnoreCase("show")) {//DONE
-        		Critter.displayWorld();        		
+        		Critter.displayWorld();//displaying the world     		
         	}
         	else if (input.equalsIgnoreCase("step")) {//DONE
-        		int numSteps = 1;
+        		int numSteps = 1;//number of steps = 1
         		input = kb.next();
         		try {										
-					numSteps = Integer.parseInt(input);        			
+					numSteps = Integer.parseInt(input); //updating number of steps       			
 					for(int i = 0; i < numSteps; i++){
-						Critter.worldTimeStep();
+						Critter.worldTimeStep();//stepping the World 
 					}
-				} catch (NumberFormatException e) {
+				} catch (NumberFormatException e) {//if an error was found in the input
 					printError(input);
 				}
         	}
         	else if (input.equalsIgnoreCase("seed")) {//DONE
         		String s = kb.next();
         		try{
-        			Long l = Long.parseLong(s);
+        			Long l = Long.parseLong(s);//getting the long number to pass to seed
         			Critter.setSeed(l);
-        		}catch(NumberFormatException e){
+        		}catch(NumberFormatException e){//if error was found in the input
         			printError(s);
         		}
         		
         	}
         	else if (input.equalsIgnoreCase("make")) {//DONE
-        		String packageName = "assignment4.";
+        		String packageName = "assignment4.";//tag to add to beginning of class name
         		int numMake = 1;
         		if(kb.hasNext()){
-        			String name = kb.next();
+        			String name = kb.next();//gets the name of the Critter type
         			if(kb.hasNextInt()){
         				input = kb.next();
-        				numMake = Integer.parseInt(input);
+        				numMake = Integer.parseInt(input);//parses the int out of input
         			}
         			try{
         				for(int i = 0; i < numMake; i++){
-        					Critter.makeCritter(packageName + name);
+        					Critter.makeCritter(packageName + name);//adds critter to world
             			}
-        			}catch(InvalidCritterException e){
+        			}catch(InvalidCritterException e){//if the name of the critter was invalid
         				printError(input);
         			}
         			
-        		}else{
+        		}else{//This is default to make Craigs and Algaes if no other class name is given
+        			//might want to remove this, not sure
         			String craig = "Craig";
             		String algae = "Algae";
             		try {
@@ -131,23 +132,26 @@ public class Main {
             				}
             			}
     				} catch (InvalidCritterException e) {
-    					// TODO Auto-generated catch block
-    					e.printStackTrace();
+    					printError(input);
     				}
         		}
         		
         		
         		
         	}
-        	else if (input.equalsIgnoreCase("stats")) {//DONE-ISH
-        		String packageName = "assignment4.";
+        	else if (input.equalsIgnoreCase("stats")) {//DONE
+        		String packageName = "assignment4.";//tag to add to class name
         		if(kb.hasNext()){
-        			String name = kb.next();
+        			String name = kb.next();//getting name of class to get stats for
         			try{
         				List <Critter> list = Critter.getInstances(packageName + name);
+        				//^^Retrieving the list of specific critters present in the world
         				Class<?> myClass = Class.forName(packageName + name);
+        				//^^Creating Class object of the type of Critter input
         				Method method = myClass.getMethod("runStats", List.class);
-        				method.invoke(null, list);
+        				//^^Retrieving the method runStats from the specific Class object
+        				method.invoke(null, list);//null because static, list is parameter
+        				//running the runStats method
         				
 
         			}catch(Exception e){
@@ -164,6 +168,10 @@ public class Main {
         System.out.flush();
 
     }
+    /**
+     * Prints out that an error has occured while processing and gives the input that caused the error
+     * @param s is string that caused error
+     */
     public static void printError(String s){
     	System.out.println("error processing: " + s);
     }
