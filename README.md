@@ -8,11 +8,16 @@ For Sunday
 	-Needs testing
 2. Main flags - Chris
 	-Should be fixed
+	-make still has the add 25 craigs and 100 algae
 3. Exceptions & Errors - Chris
 	-Should be done
 4. Comment Everything - K
 	-K needs this
 5. System Tests - Karl
+
+Questions for TAs
+1. for main.make, do we need to have the default add 25 craigs and 100 algae still?
+2. will they be passing class names with the package name, or do we need to add it(Like we have it)?
 
 DONE
 
