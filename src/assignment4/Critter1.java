@@ -17,16 +17,18 @@ import assignment4.Critter.TestCritter;
  * */
 public class Critter1 extends TestCritter{
 	
-	private int dir;
-	private int[] genes = new int[8];
-	private boolean isPregnant;
-	private boolean isAwake;
-	private static final int playing = 1;
-	private static final int lookingForFood = 5;
-	private static final int sleeping = 18;
+	private int dir; //direction the critter goes
+	private int[] genes = new int[8]; //genes of the critter
+	private boolean isPregnant;//if it has fought another critter1 and had any babies
+	private boolean isAwake;//if the critter is awake or not
+	private static final int playing = 1;// 1/24 chance that the critter is playing
+	private static final int lookingForFood = 5;// 5/24 chance that the critter is searching for food
+	private static final int sleeping = 18;// 18/24 chance that the critter is sleeping
 	
 	private static final int awake = playing + lookingForFood;
-	
+	/**
+	 * Constructor
+	 */
 	public Critter1(){
 		for(int i = 0; i < 8; i++){
 			genes[i] = Critter.getRandomInt(8);
@@ -35,7 +37,7 @@ public class Critter1 extends TestCritter{
 		isAwake = true;
 		dir = Critter.getRandomInt(8);
 	}
-
+	
 	public int getDir() {
 		return dir;
 	}
@@ -43,7 +45,9 @@ public class Critter1 extends TestCritter{
 	public void setDir(int dir) {
 		this.dir = dir;
 	}
-
+	/**
+	 * @return 1, this is how critter is displayed on screen
+	 */
 	public String toString(){
 		return "1";
 	}
@@ -114,7 +118,7 @@ public class Critter1 extends TestCritter{
 	 * if the cat is pregnant, itll try to avoid fighting
 	 * but if not pregnant, it will just fight
 	 * @param opponent is the toString of the opponent, so if there are special interactions, you can code them
-	 * @return 
+	 * @return if the critter will fight
 	 */
 	@Override
 	public boolean fight(String opponent) {

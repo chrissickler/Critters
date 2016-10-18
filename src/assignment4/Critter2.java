@@ -14,16 +14,18 @@ import assignment4.Critter.TestCritter;
  * */
 public class Critter2 extends TestCritter{
 	
-	private static final int sleeping = 8;
-	private static final int active = 3 + sleeping;
-	private static final int searchingForFood = 3 + active;
-	private static final int otherwise = 10 + searchingForFood;
+	private static final int sleeping = 8;// 8/24 chance the critter is sleeping
+	private static final int active = 3 + sleeping;// 3/24 chance that the critter is active
+	private static final int searchingForFood = 3 + active;// 3/24 chance the critter is searching for food
+	private static final int otherwise = 10 + searchingForFood;// 10/24 chance the critter is doig otherwise
 	
-	private int dir;
-	private int[] genes = new int[8];
-	private boolean isAwake;
+	private int dir;// direction the critter will move
+	private int[] genes = new int[8];//genes
+	private boolean isAwake;//if the critter is awake
 	
-		
+	/**
+	 * Constructor
+	 */
 	public Critter2(){
 		for(int i = 0; i < 8; i++){
 			genes[i] = Critter.getRandomInt(8);
@@ -41,12 +43,20 @@ public class Critter2 extends TestCritter{
 		this.dir = dir;
 	}
 
-
+	/**
+	 * @return 2, this is how critter2 is displayed on screen
+	 */
 	@Override
 	public String toString(){
 		return "2";
 	}
-	
+	/**
+	 * checks:
+	 * 		if critter is asleep
+	 * 		if critter is active, runs
+	 * 		if searching for food, walk in random directions
+	 * 		otherwise, just walks in a set direction
+	 */
 	@Override
 	public void doTimeStep() {
 		int num = Critter.getRandomInt(24);
@@ -75,7 +85,13 @@ public class Critter2 extends TestCritter{
 			}
 		}
 	}
-
+/**
+ * checks opponent:
+ * 		if algae, fights it
+ * 		if 1, tries to walk away
+ * 		if 3, tries to run away
+ * 		otherwise, fights
+ */
 	@Override
 	public boolean fight(String opponent) {
 		if(opponent.equals("@")){
