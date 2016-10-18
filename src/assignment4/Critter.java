@@ -111,7 +111,10 @@ public abstract class Critter {
 		}
 		addCritter(critter);
 	}
-	
+	/**
+	 * Adds critter to CritterWorld
+	 * @param critter to be added
+	 */
 	public static void addCritter(Critter critter) {
 		if(critter != null) {
 			critter.location = CritterWorld.getRandomLocation();
@@ -233,7 +236,9 @@ public abstract class Critter {
 	public static void clearWorld() {
 		CritterWorld.clearWorld();
 	}
-	
+	/**
+	 * Call this to do all the timeSteps for all the critters in CritterWorld
+	 */
 	public static void worldTimeStep() {
 		CritterWorld.doTimeStep();
 		handleInteractions();
@@ -241,11 +246,20 @@ public abstract class Critter {
 		CritterWorld.addBabies();
 		CritterWorld.removeDead();
 	}
-	
+	/**
+	 * Displays the World in printed version on the consule
+	 */
 	public static void displayWorld() {
 		CritterWorld.printWorld();
 	}
-	
+	/**
+	 * Cycles through all the critters
+	 * checking to see if any are in the same location
+	 * if they are, this calls their fight methods to see if they will fight or attempt to move
+	 * if they fight, a roll is done between 0 and the critters energy
+	 * the critter with the higher roll gains 1/2 the energy from the loser
+	 * the loser dies and loses its energy
+	 */
 	private static void handleInteractions(){
 		boolean aFight;
 		boolean bFight;
