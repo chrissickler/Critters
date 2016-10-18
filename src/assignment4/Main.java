@@ -14,6 +14,7 @@ package assignment4; // cannot be in default package
 import java.util.List;
 import java.util.Scanner;
 import java.io.*;
+import java.lang.reflect.*;
 
 
 /*
@@ -144,31 +145,15 @@ public class Main {
         			String name = kb.next();
         			try{
         				List <Critter> list = Critter.getInstances(packageName + name);
+        				Class<?> myClass = Class.forName(packageName + name);
+        				Method method = myClass.getMethod("runStats", List.class);
+        				method.invoke(null, list);
         				
-        				if(list.get(0) instanceof Critter1){
-        					Critter1.runStats(list);
-        				}
-        				else if(list.get(0) instanceof Critter2){
-        					Critter2.runStats(list);
-        				}
-        				else if(list.get(0) instanceof Critter3){
-        					Critter3.runStats(list);
-        				}
-        				else if(list.get(0) instanceof Critter4){
-        					Critter4.runStats(list);
-        				}
-        				else if(list.get(0) instanceof Craig){
-							Craig.runStats(list);
-						}
-        				else if(list.get(0) instanceof Algae){
-							Algae.runStats(list);
-        				}
+
         			}catch(Exception e){
         				System.out.println("error processing " + name);
         			}
-        		}
-        		
-        		//TODO: STAGE 3
+        		}        		
         	}
         	else {
         		System.out.println("Invalid command: " + input);

@@ -106,7 +106,7 @@ public abstract class Critter {
 			Object obj = newCon.newInstance();
 			critter = (Critter)obj;
 			
-		}catch(ClassNotFoundException|NoSuchMethodException|SecurityException|InstantiationException|IllegalAccessException|IllegalArgumentException|InvocationTargetException e){
+		}catch(Exception e){
 			throw new InvalidCritterException(critter_class_name);
 		}
 		addCritter(critter);
