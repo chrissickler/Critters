@@ -7,13 +7,12 @@ For Sunday
 	-From what I can tell, I don't think we need to override the Critter.runStats
 	-Needs testing
 2. Main flags - Chris
-	-Need to fix stats still 
+	-Should be fixed
 3. Exceptions & Errors - Chris
-	-Needs testing
-4. Comment Everything - C&K
-	-C&K needs this
+	-Should be done
+4. Comment Everything - K
+	-K needs this
 5. System Tests - Karl
-6. Fix Main.runStats
 
 DONE
 
