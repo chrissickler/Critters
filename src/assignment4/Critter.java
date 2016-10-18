@@ -54,32 +54,45 @@ public abstract class Critter {
 	
 	//private int x_coord;
 	//private int y_coord;
+	/**
+	 * Moves the critter 1 space
+	 * @param direction to walk in
+	 */
 	protected final void walk(int direction) {
 		energy -= Params.walk_energy_cost;
-		if (!hasMoved && energy > 0) {
+		if (!hasMoved && energy > 0) {//checking if the critter has moved this step
 			direction = direction % 8;
 			location.update(direction);
 			hasMoved = true;
 		}
 	}
-	
+	/**
+	 * Moves the critter 2 spaces
+	 * @param direction to run in
+	 */
 	protected final void run(int direction) {
 		energy -= Params.run_energy_cost;
-		if (!hasMoved && energy > 0) {
+		if (!hasMoved && energy > 0) {//checking if critter has moved already this step
 			direction = direction % 8;
 			location.update(direction);
 			location.update(direction);
 			hasMoved = true;
 		}
 	}
-	
+	/**
+	 * Takes 1/2 energy from parent and gives it to baby.
+	 * Then gives baby a location and adds it to baby arrayList for adding at the end of WorldTimeStep
+	 * @param offspring is the new baby critter
+	 * @param direction that the baby will move towards first
+	 */
 	protected final void reproduce(Critter offspring, int direction) {
 		if(this.energy >= Params.min_reproduce_energy) {
 			offspring.energy = this.energy/2;
 			this.energy += this.energy %2;
 			this.energy /= 2;
-			offspring.location.update(direction);
-			CritterWorld.babies.put((TestCritter) offspring, offspring.location);
+			//^^Dividing up the energy between the baby and the parent
+			offspring.location.update(direction);//giving the baby a location
+			CritterWorld.babies.put((TestCritter) offspring, offspring.location);//adding baby to CritterWorld baby list
 		}
 	}
 	
@@ -98,18 +111,17 @@ public abstract class Critter {
 	 * @throws InvalidCritterException
 	 */	
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException{
-		//TODO need to go over this
 		Critter critter = null;
 		try{
 			Class<?> c = Class.forName(critter_class_name);
 			Constructor<?> newCon = c.getConstructor();
 			Object obj = newCon.newInstance();
 			critter = (Critter)obj;
-			
+			//^^This is to get an object of the class requested
 		}catch(Exception e){
 			throw new InvalidCritterException(critter_class_name);
 		}
-		addCritter(critter);
+		addCritter(critter);//send the critter to addCritter to be added to World
 	}
 	/**
 	 * Adds critter to CritterWorld
@@ -117,9 +129,9 @@ public abstract class Critter {
 	 */
 	public static void addCritter(Critter critter) {
 		if(critter != null) {
-			critter.location = CritterWorld.getRandomLocation();
-			CritterWorld.addCritter(critter, critter.location);
-			critter.energy = Params.start_energy;
+			critter.location = CritterWorld.getRandomLocation();//returns a random location
+			CritterWorld.addCritter(critter, critter.location);//adds the critter to CritterWorld
+			critter.energy = Params.start_energy;//sets that critter's energy to startEnergy
 		}
 	}
 	
@@ -133,18 +145,19 @@ public abstract class Critter {
 		List<Critter> result = new java.util.ArrayList<Critter>();
 		Critter critter;
 		try{
-			Class<?> c = Class.forName(critter_class_name);
-			Constructor<?> newCon = c.getConstructor();
-			Object obj = newCon.newInstance();
-			critter = (Critter)obj;
-			String s = critter.toString();
+			Class<?> c = Class.forName(critter_class_name);//Creates a class object of type given by name
+			Constructor<?> newCon = c.getConstructor();//gets the constructor for that class
+			Object obj = newCon.newInstance();//creates the actual object using the constructor
+			critter = (Critter)obj;//casts the object as a critter type
+			//^^This first bit is to determine what type of critter we want to return in List
+			String s = critter.toString();//gets the toString value to compare
 			
 			for(Critter i : CritterWorld.critterMap.keySet()) {
-				if(i.toString() == s) { 	
-					result.add(i);
+				if(i.toString() == s) { //cycling through, finds critters with the same toString
+					result.add(i);//adds them to the list to return
 				}
 			}
-		}catch(ClassNotFoundException|NoSuchMethodException|SecurityException|InstantiationException|IllegalAccessException|IllegalArgumentException|InvocationTargetException e){
+		}catch(Exception e){
 			throw new InvalidCritterException(critter_class_name);
 		}
 		
@@ -234,17 +247,22 @@ public abstract class Critter {
 	 * Clear the world of all critters, dead and alive
 	 */
 	public static void clearWorld() {
-		CritterWorld.clearWorld();
+		CritterWorld.clearWorld();//clears the CritterWorld
 	}
 	/**
-	 * Call this to do all the timeSteps for all the critters in CritterWorld
+	 * Does:
+	 *  timeSteps
+	 *  fights
+	 *  adding algae
+	 *  adding babies newly born
+	 *  removing dead critters
 	 */
 	public static void worldTimeStep() {
-		CritterWorld.doTimeStep();
-		handleInteractions();
-		CritterWorld.makeAlgae();
-		CritterWorld.addBabies();
-		CritterWorld.removeDead();
+		CritterWorld.doTimeStep();//does all time steps
+		handleInteractions();//handles fights
+		CritterWorld.makeAlgae();//adds algae to board
+		CritterWorld.addBabies();//adds any babies that were produced
+		CritterWorld.removeDead();//removes all dead from the World
 	}
 	/**
 	 * Displays the World in printed version on the consule
