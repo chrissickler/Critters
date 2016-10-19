@@ -117,12 +117,7 @@ public class CrittersTest {
 		String inputFile = "mainTest1.txt";
 		String outputFile = "";
 		String[] args = {inputFile};
-		try {
-			Main.main(args);
-		} catch (InvalidInputError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Main.main(args);
 	}
 	
 	//@Test
@@ -191,7 +186,7 @@ public class CrittersTest {
 		//c.hasMoved = false;
 		assertTrue(b0 && b1 && b2 && b3 && b4 && b5 && b6 && b7);
 	}
-	@Test
+	//@Test
 	public void testCritterRun(){
 		Craig c = new Craig();
 		c.setX_coord(10);

@@ -118,17 +118,17 @@ public class Critter3 extends TestCritter{
 			total_pantsOnFire = c.factCheckRecord[4];
 			
 		}
-		System.out.println("" + critter3s.size() + " total Craigs    ");
+		System.out.print("" + critter3s.size() + " total Critter3s    ");
 		System.out.print("" + total_straight / (moveTotal * 0.01 * critter3s.size()) + "% straight   ");
 		System.out.print("" + total_back / (moveTotal * 0.01 * critter3s.size()) + "% back   ");
 		System.out.print("" + total_right / (moveTotal * 0.01 * critter3s.size()) + "% right   ");
-		System.out.println("" + total_left / (moveTotal * 0.01 * critter3s.size()) + "% left   " + "\n");
+		System.out.println("" + total_left / (moveTotal * 0.01 * critter3s.size()) + "% left   ");
 		System.out.println("Fact Check Record:");
-		System.out.print(total_truth + "% true");
-		System.out.print(total_mostlyTrue + "% mostly true");
-		System.out.print(total_halfTrue + "% half true");
-		System.out.print(total_mostlyFalse + "% mostly false");
-		System.out.print(total_pantsOnFire + "% pants on fire");
+		System.out.print(total_truth + "% true    ");
+		System.out.print(total_mostlyTrue + "% mostly true    ");
+		System.out.print(total_halfTrue + "% half true    ");
+		System.out.print(total_mostlyFalse + "% mostly false    ");
+		System.out.print(total_pantsOnFire + "% pants on fire    ");
 		System.out.println();
 	}
 

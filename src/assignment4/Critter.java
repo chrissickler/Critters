@@ -91,6 +91,7 @@ public abstract class Critter {
 			this.energy += this.energy %2;
 			this.energy /= 2;
 			//^^Dividing up the energy between the baby and the parent
+			offspring.location = this.location;
 			offspring.location.update(direction);//giving the baby a location
 			CritterWorld.babies.put((TestCritter) offspring, offspring.location);//adding baby to CritterWorld baby list
 		}

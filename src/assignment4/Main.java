@@ -43,7 +43,7 @@ public class Main {
      * and the second is test (for test output, where all output to be directed to a String), or nothing.
      * @throws InvalidInputError 
      */
-    public static void main(String[] args) throws InvalidInputError { 
+    public static void main(String[] args) { 
         if (args.length != 0) {
             try {
                 inputFile = args[0];
