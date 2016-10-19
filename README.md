@@ -17,7 +17,7 @@ For Sunday
 
 Questions for TAs
 1. for main.make, do we need to have the default add 25 craigs and 100 algae still?
-2. will they be passing class names with the package name, or do we need to add it(Like we have it)?
+
 
 DONE
 
