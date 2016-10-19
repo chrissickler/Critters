@@ -63,7 +63,7 @@ public abstract class Critter {
 		if (!hasMoved && energy > 0) {//checking if the critter has moved this step
 			direction = direction % 8;
 			location.update(direction);
-			hasMoved = true;
+			//hasMoved = true;
 		}
 	}
 	/**
@@ -76,7 +76,7 @@ public abstract class Critter {
 			direction = direction % 8;
 			location.update(direction);
 			location.update(direction);
-			hasMoved = true;
+			//hasMoved = true;
 		}
 	}
 	/**
