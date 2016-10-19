@@ -2,9 +2,6 @@ package assignment4;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import assignment4.Critter.TestCritter;
@@ -34,8 +31,7 @@ public class CrittersTest {
 		Critter3 c3 = new Critter3();
 		Critter.addCritter(c3);
 		Critter4 c4 = new Critter4();
-		Critter.addCritter(c4);
-		
+		Critter.addCritter(c4);		
 		try {
 			CritterWorld.printWorld();
 			for(int i = 0; i < 10; i++){
@@ -186,7 +182,7 @@ public class CrittersTest {
 		//c.hasMoved = false;
 		assertTrue(b0 && b1 && b2 && b3 && b4 && b5 && b6 && b7);
 	}
-	//@Test
+	@Test
 	public void testCritterRun(){
 		Craig c = new Craig();
 		c.setX_coord(4);

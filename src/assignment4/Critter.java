@@ -158,6 +158,11 @@ public abstract class Critter {
 					result.add(i);//adds them to the list to return
 				}
 			}
+			for(Critter i : CritterWorld.babies.keySet()) {
+				if(i.toString() == s) { //cycling through, finds critters with the same toString
+					result.add(i);//adds them to the list to return
+				}
+			}
 		}catch(Exception e){
 			throw new InvalidCritterException(critter_class_name);
 		}

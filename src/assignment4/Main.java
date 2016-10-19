@@ -73,27 +73,31 @@ public class Main {
         /* Write your code below. */
         String input;
         while(true) {
-        	System.out.println("critters> ");
-        	input = kb.next();//input string for reading
-        	if(input.equalsIgnoreCase("quit")) {//DONE
+        	if(kb.equals(System.in)){
+        		System.out.println("critters> ");
+        	}
+        	input = kb.nextLine();//input string for reading
+        	String[] inputs = input.split(" ");
+        	
+        	if(inputs[0].equalsIgnoreCase("quit") && inputs.length == 1) {//DONE
         		break;//breaking the loop and ending the program
         	}
-        	else if (input.equalsIgnoreCase("show")) {//DONE
+        	else if (inputs[0].equalsIgnoreCase("show") && inputs.length == 1) {//DONE
         		Critter.displayWorld();//displaying the world     		
         	}
-        	else if (input.equalsIgnoreCase("step")) {//DONE
-        		int numSteps = 1;//number of steps = 1
-        		input = kb.next();
+        	else if (inputs[0].equalsIgnoreCase("step") && inputs.length < 3) {//DONE
         		try {										
-					numSteps = Integer.parseInt(input); //updating number of steps       			
+					int numSteps = Integer.parseInt(inputs[1]); //updating number of steps       			
 					for(int i = 0; i < numSteps; i++){
 						Critter.worldTimeStep();//stepping the World 
 					}
 				} catch (NumberFormatException e) {//if an error was found in the input
 					printError(input);
+				} catch (IndexOutOfBoundsException e1) {
+					Critter.worldTimeStep();
 				}
         	}
-        	else if (input.equalsIgnoreCase("seed")) {//DONE
+        	else if (input.equalsIgnoreCase("seed") && inputs.length == 2) {//DONE
         		String s = kb.next();
         		try{
         			Long l = Long.parseLong(s);//getting the long number to pass to seed
@@ -103,7 +107,7 @@ public class Main {
         		}
         		
         	}
-        	else if (input.equalsIgnoreCase("make")) {//DONE
+        	else if (input.equalsIgnoreCase("make") && inputs.length > 1 && inputs.length < 4) {//DONE
         		String packageName = "assignment4.";//tag to add to beginning of class name
         		int numMake = 1;
         		if(kb.hasNext()){
@@ -120,26 +124,9 @@ public class Main {
         				printError(input);
         			}
         			
-        		}else{//This is default to make Craigs and Algaes if no other class name is given
-        			//might want to remove this, not sure
-        			String craig = "Craig";
-            		String algae = "Algae";
-            		try {
-            			for(int i = 0; i < 25; i++) {
-            				Critter.makeCritter(packageName+craig);
-            				for(int j = 0; j < 4; j++) {
-            					Critter.makeCritter(packageName+algae);
-            				}
-            			}
-    				} catch (InvalidCritterException e) {
-    					printError(input);
-    				}
-        		}
-        		
-        		
-        		
+        		} 	
         	}
-        	else if (input.equalsIgnoreCase("stats")) {//DONE
+        	else if (input.equalsIgnoreCase("stats") && inputs.length == 2) {//DONE
         		String packageName = "assignment4.";//tag to add to class name
         		if(kb.hasNext()){
         			String name = kb.next();//getting name of class to get stats for
@@ -155,12 +142,12 @@ public class Main {
         				
 
         			}catch(Exception e){
-        				System.out.println("error processing " + name);
+        				printError(input);
         			}
         		}        		
         	}
         	else {
-        		System.out.println("Invalid command: " + input);
+        		printError(input);
         		//throw new InvalidInputError();//TODO: INVALID INPUT
         	}
         }
