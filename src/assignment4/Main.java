@@ -73,6 +73,7 @@ public class Main {
         /* Write your code below. */
         String input;
         while(true) {
+<<<<<<< HEAD
         	if(kb.equals(System.in)){
         		System.out.println("critters> ");
         	}
@@ -80,6 +81,11 @@ public class Main {
         	String[] inputs = input.split(" ");
         	
         	if(inputs[0].equalsIgnoreCase("quit") && inputs.length == 1) {//DONE
+=======
+        	System.out.print("critters> ");
+        	input = kb.next();//input string for reading
+        	if(input.equalsIgnoreCase("quit")) {//DONE
+>>>>>>> 16adbe140e7b96557afe1b5c0ba479a649ad381f
         		break;//breaking the loop and ending the program
         	}
         	else if (inputs[0].equalsIgnoreCase("show") && inputs.length == 1) {//DONE
@@ -124,7 +130,11 @@ public class Main {
         				printError(input);
         			}
         			
+<<<<<<< HEAD
         		} 	
+=======
+        		}
+>>>>>>> 16adbe140e7b96557afe1b5c0ba479a649ad381f
         	}
         	else if (input.equalsIgnoreCase("stats") && inputs.length == 2) {//DONE
         		String packageName = "assignment4.";//tag to add to class name
