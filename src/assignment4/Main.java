@@ -73,7 +73,7 @@ public class Main {
         /* Write your code below. */
         String input;
         while(true) {
-        	System.out.println("critters> ");
+        	System.out.print("critters> ");
         	input = kb.next();//input string for reading
         	if(input.equalsIgnoreCase("quit")) {//DONE
         		break;//breaking the loop and ending the program
@@ -120,24 +120,7 @@ public class Main {
         				printError(input);
         			}
         			
-        		}else{//This is default to make Craigs and Algaes if no other class name is given
-        			//might want to remove this, not sure
-        			String craig = "Craig";
-            		String algae = "Algae";
-            		try {
-            			for(int i = 0; i < 25; i++) {
-            				Critter.makeCritter(packageName+craig);
-            				for(int j = 0; j < 4; j++) {
-            					Critter.makeCritter(packageName+algae);
-            				}
-            			}
-    				} catch (InvalidCritterException e) {
-    					printError(input);
-    				}
         		}
-        		
-        		
-        		
         	}
         	else if (input.equalsIgnoreCase("stats")) {//DONE
         		String packageName = "assignment4.";//tag to add to class name
