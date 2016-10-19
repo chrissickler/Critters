@@ -244,4 +244,17 @@ public class CrittersTest {
 		}
 		assertTrue(b0 && b1 && b2 && b3 && b4 && b5 && b6 && b7);
 	}
+	@Test 
+	public void testReproduce(){
+		Craig craig = new Craig();
+		craig.setX_coord(4);
+		craig.setY_coord(4);
+		craig.setEnergy(100);
+		
+		Craig baby = new Craig();
+		craig.reproduce(baby, 0);
+		Point p1 = new Point(craig.getX_coord(), craig.getY_coord());
+		Point p2 = new Point(baby.getX_coord(), baby.getY_coord());
+		assertTrue( (p2.getX() - p1.getX() == 1) && (p1.getY() == p2.getY()) );
+	}
 }
