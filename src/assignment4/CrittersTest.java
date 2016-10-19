@@ -112,7 +112,7 @@ public class CrittersTest {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void testMain() {
 		String inputFile = "mainTest1.txt";
 		String outputFile = "";
@@ -128,8 +128,8 @@ public class CrittersTest {
 	//@Test
 	public void testCritterWalk(){
 		Craig c = new Craig();
-		c.setX_coord(10);
-		c.setY_coord(10);
+		c.setX_coord(4);
+		c.setY_coord(4);
 		c.setEnergy(1000);
 		boolean b0 = false;
 		boolean b1 = false;
@@ -194,8 +194,8 @@ public class CrittersTest {
 	@Test
 	public void testCritterRun(){
 		Craig c = new Craig();
-		c.setX_coord(10);
-		c.setY_coord(10);
+		c.setX_coord(4);
+		c.setY_coord(4);
 		c.setEnergy(1000);
 		boolean b0 = false;
 		boolean b1 = false;

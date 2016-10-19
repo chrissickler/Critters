@@ -15,6 +15,10 @@ For Sunday
 	-K needs this
 5. System Tests - Karl
 
+********************************************************************
+Critters EXTEND Critter, not TestCritter
+********************************************************************
+
 Questions for TAs
 1. for main.make, do we need to have the default add 25 craigs and 100 algae still?
 
