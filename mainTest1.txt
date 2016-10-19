@@ -1,0 +1,28 @@
+stats Critter1
+stats Critter2
+stats Critter3
+stats Critter4
+stats Critter5
+stats Craig
+stats Algae
+
+make Critter1 1
+make Critter2 2
+make Critter3 3
+make Critter4 4
+make Critter5 5
+make Craig 5
+
+step
+show 5
+show
+step 5 show
+
+seed 99987685.099087
+seed two
+
+step 6 show
+
+quit
+
+step

@@ -11,15 +11,15 @@ import assignment4.Critter.TestCritter;
 
 public class CrittersTest {
 
-	@BeforeClass
+	//@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 
-	@Before
+	//@Before
 	public void setUp() throws Exception {
 	}
 
-	@After
+	//@After
 	public void tearDown() throws Exception {
 	}
 
@@ -65,7 +65,7 @@ public class CrittersTest {
 		Critter.displayWorld();	// no craig
 	}
 	
-	@Test
+	//@Test
 	public void testFightCritter(){
 		int numCritters = 10;
 		try {
@@ -98,8 +98,7 @@ public class CrittersTest {
 			Critter.addCritter(c);
 			Critter1 c1 = new Critter1();
 			Critter.addCritter(c1);
-		}
-		
+		}		
 		try{
 			CritterWorld.printWorld();
 			for(int i = 0; i < 10; i++){
@@ -111,7 +110,19 @@ public class CrittersTest {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
+	}
+	
+	@Test
+	public void testMain() {
+		String inputFile = "mainTest1.txt";
+		String outputFile = "";
+		String[] args = {inputFile};
+		try {
+			Main.main(args);
+		} catch (InvalidInputError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
