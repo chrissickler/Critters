@@ -5,9 +5,16 @@ import assignment4.Critter.TestCritter;
 /**
  * This Critter's name is Donald. He doesn't like being labeled as a number. He thinks its unfair.
  * This is unfair treatment. He has more money than any other critter who has ever been simulated.
- * We are never really know what he is going to do or where he is going to go
+ * We are never really know what he is going to do or where he is going to go. Based on his level
+ * of activity we are fairly sure that he will be active roughly four hours per week, awake roughly
+ * 2/3 of the time, and asleep roughly 1/3 of the time. Being a critter wasn't his first choice, and
+ * he wasn't the people's choice, but he's what we've got.
+ * Donald seldom tells the truth, and seldom does what you expect from a critter. Every time step in 
+ * which he is not asleep, he randomly chooses a response to his suggested direction from the RNCC 
+ * (Republican National Critter Council) when he gets a new direction, he will only go that direction
+ * 4% of the time since that's how often he tells the truth. The worse his lie the further from the 
+ * suggested direction he goes. We keep track of what directions he moves and his fact check record.
  * @author KSolomon
- *
  */
 
 public class Critter3 extends TestCritter{
@@ -21,19 +28,17 @@ public class Critter3 extends TestCritter{
 	private static final int mostlyFalse = 18 + halfTruth;
 	private static final int pantsOnFire = 52 + mostlyFalse;
 	private static final int[] truthTable = {truth, mostlyTruth, halfTruth, mostlyFalse, pantsOnFire};
+	private int[] factCheckRecord = new int[5];
 
 	private static final int active = 4;	// active on average 4 hours per week to maintain BMI = 30;
 	private static final int awake = 168-49;	//sleep 7 hours per day
 	
-	private static final int GENE_TOTAL = 24000;
-	private int[] genes = new int[GENE_TOTAL];
+	private static final int moveTotal = 8;
+	private int[] moves = new int[moveTotal];
 	
 	private int dir;
 	
 	public Critter3() {
-		for (int k = 0; k < 8; k += 1) {
-			genes[k] = Critter.getRandomInt(8);
-		}
 		dir = Critter.getRandomInt(8);
 	}
 
@@ -48,6 +53,7 @@ public class Critter3 extends TestCritter{
 	@Override
 	public void doTimeStep() {
 		dir = toDirection();
+		moves[dir] +=1;	//keep track of his movements
 		int activity = Critter.getRandomInt(168);
 		if(activity < active) {
 			run(dir);
@@ -57,7 +63,7 @@ public class Critter3 extends TestCritter{
 		}
 		if(getEnergy() > 8*Params.start_energy/(Params.min_reproduce_energy)){
 			Critter3 newDonald = new Critter3();
-			newDonald.genes = this.genes;	//asexual reproduction
+			newDonald.moves = this.moves;	//asexual reproduction
 			reproduce(newDonald, activity);
 		}
 	}
@@ -76,12 +82,16 @@ public class Critter3 extends TestCritter{
 	 */
 	private int toDirection() {
 		int statement = Critter.getRandomInt(pantsOnFire+1);
+		int truth = 0;
 		for(int i = 0; i < truthTable.length; i++) {
 			if(statement < truthTable[i]) {
 				dir += i;
+				truth += 1;
 			}
 		}
-		return dir %= 8;
+		factCheckRecord[truth] +=1;	//fact Check Donald and see how honest he was
+		dir %= 8;
+		return dir;
 	}
 	
 	public static void runStats(java.util.List<Critter> critter3s) {
@@ -89,18 +99,36 @@ public class Critter3 extends TestCritter{
 		int total_left = 0;
 		int total_right = 0;
 		int total_back = 0;
+		int total_truth = 0;
+		int total_mostlyTrue = 0;
+		int total_halfTrue = 0;
+		int total_mostlyFalse = 0;
+		int total_pantsOnFire = 0;
 		for (Critter critter : critter3s) {
 			Critter3 c = (Critter3) critter;
-			total_straight += c.genes[0];
-			total_right += c.genes[1] + c.genes[2] + c.genes[3];
-			total_back += c.genes[4];
-			total_left += c.genes[5] + c.genes[6] + c.genes[7];
+			total_straight += c.moves[0];
+			total_right += c.moves[1] + c.moves[2] + c.moves[3];
+			total_back += c.moves[4];
+			total_left += c.moves[5] + c.moves[6] + c.moves[7];
+			
+			total_truth = c.factCheckRecord[0];
+			total_mostlyTrue = c.factCheckRecord[1];
+			total_halfTrue = c.factCheckRecord[2];
+			total_mostlyFalse = c.factCheckRecord[3];
+			total_pantsOnFire = c.factCheckRecord[4];
+			
 		}
-		System.out.print("" + critter3s.size() + " total Craigs    ");
-		System.out.print("" + total_straight / (GENE_TOTAL * 0.01 * critter3s.size()) + "% straight   ");
-		System.out.print("" + total_back / (GENE_TOTAL * 0.01 * critter3s.size()) + "% back   ");
-		System.out.print("" + total_right / (GENE_TOTAL * 0.01 * critter3s.size()) + "% right   ");
-		System.out.print("" + total_left / (GENE_TOTAL * 0.01 * critter3s.size()) + "% left   ");
+		System.out.println("" + critter3s.size() + " total Craigs    ");
+		System.out.print("" + total_straight / (moveTotal * 0.01 * critter3s.size()) + "% straight   ");
+		System.out.print("" + total_back / (moveTotal * 0.01 * critter3s.size()) + "% back   ");
+		System.out.print("" + total_right / (moveTotal * 0.01 * critter3s.size()) + "% right   ");
+		System.out.println("" + total_left / (moveTotal * 0.01 * critter3s.size()) + "% left   " + "\n");
+		System.out.println("Fact Check Record:");
+		System.out.print(total_truth + "% true");
+		System.out.print(total_mostlyTrue + "% mostly true");
+		System.out.print(total_halfTrue + "% half true");
+		System.out.print(total_mostlyFalse + "% mostly false");
+		System.out.print(total_pantsOnFire + "% pants on fire");
 		System.out.println();
 	}
 
