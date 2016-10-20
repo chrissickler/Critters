@@ -47,7 +47,7 @@ public class CrittersTest {
 		try {
 			CritterWorld.printWorld();
 			for(int i = 0; i < 10; i++){
-				CritterWorld.doTimeStep();
+				Critter.worldTimeStep();
 				CritterWorld.printWorld();
 			}
 		} catch (Exception e) {
@@ -110,7 +110,7 @@ public class CrittersTest {
 		try{
 			CritterWorld.printWorld();
 			for(int i = 0; i < 10; i++){
-				CritterWorld.doTimeStep();
+				Critter.worldTimeStep();
 				Craig.runStats(Critter.getInstances("assignment4.Craig"));
 				Critter1.runStats(Critter.getInstances("assignment4.Critter1"));
 				CritterWorld.printWorld();

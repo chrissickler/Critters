@@ -77,7 +77,6 @@ public class CritterWorld {
 		for(Critter i : critterMap.keySet()){
 			i.doTimeStep();
 		}
-		addBabies();
 	}
 	
 	/**

@@ -269,9 +269,9 @@ public abstract class Critter {
 	public static void worldTimeStep() {
 		CritterWorld.doTimeStep();//does all time steps
 		handleInteractions();//handles fights
-		CritterWorld.makeAlgae();//adds algae to board
-		CritterWorld.addBabies();//adds any babies that were produced
 		CritterWorld.removeDead();//removes all dead from the World
+		CritterWorld.makeAlgae();//adds algae to board
+		CritterWorld.addBabies();
 	}
 	/**
 	 * Displays the World in printed version on the consule
