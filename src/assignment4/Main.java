@@ -38,7 +38,6 @@ public class Main {
      * @throws InvalidInputError 
      */
     public static void main(String[] args) {
-        myPackage = Critter.class.getPackage().toString().split(" ")[1];
         validCommands.add("quit");
         validCommands.add("show");
         validCommands.add("step");
@@ -125,13 +124,12 @@ public class Main {
         		}
         	}
         	else if (inputs[0].equalsIgnoreCase("stats") && inputs.length == 2) {//DONE
-        		String packageName = "assignment4.";//tag to add to class name
         		
     			String name = inputs[1];//getting name of class to get stats for
     			try{
-    				List <Critter> list = Critter.getInstances(packageName + name);
+    				List <Critter> list = Critter.getInstances(name);
     				//^^Retrieving the list of specific critters present in the world
-    				Class<?> myClass = Class.forName(packageName + name);
+    				Class<?> myClass = Class.forName("assignment4." + name);
     				//^^Creating Class object of the type of Critter input
     				Method method = myClass.getMethod("runStats", List.class);
     				//^^Retrieving the method runStats from the specific Class object

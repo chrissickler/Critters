@@ -15,7 +15,8 @@ package assignment4;
 import assignment4.Critter.TestCritter;
 
 /*
- * This Critter impulates a Knight in chess. It will move in the L pattern 
+ * This Critter impulates a Knight in chess. It will move in the L pattern with three moves in one direction and then one in another.
+ * This critter will walk, run, and rest at roughly equal quantities
  * Example critter
  */
 public class Critter4 extends TestCritter {
