@@ -74,13 +74,16 @@ public class Main {
         String input;
         String[] inputs;
         while(true) {
-        	if(kb.equals(System.in)){	//FIXME: DOESN'T ever evaluate to true
-        		System.out.println("critters> ");
-        	}
+        	System.out.print("critters> ");
         	input = kb.nextLine();
-        	inputs = input.split(" ");
         	
-        	if(inputs[0].equalsIgnoreCase("quit") && inputs.length == 1) {//DONE
+        	
+        	inputs = input.split(" ");
+        	if(!validCommands.contains(inputs[0])) {
+        		System.out.println("invalid command: " + input);
+        		continue;
+    		}
+        	else if(inputs[0].equalsIgnoreCase("quit") && inputs.length == 1) {//DONE
         		break;//breaking the loop and ending the program
         	}
         	else if (inputs[0].equalsIgnoreCase("show") && inputs.length == 1) {//DONE
@@ -123,9 +126,9 @@ public class Main {
 	        		for(int i = 0; i < numMake; i++) {
 						Critter.makeCritter(name);
 					}
-	        	}catch (InvalidCritterException e) {
-					System.out.println(e.toString());
-				} 
+        		}catch (NoClassDefFoundError | Exception e1) {
+					printError(input);
+				}
         	}
         	else if (inputs[0].equalsIgnoreCase("stats") && inputs.length == 2) {//DONE
         		
@@ -140,16 +143,12 @@ public class Main {
     				method.invoke(null, list);//null because static, list is parameter
     				//running the runStats method
     			}
-    			catch(Exception e1){
+    			catch(NoClassDefFoundError | Exception e1){
     				printError(input);
     			}    		
         	}
         	else {
-        		if(validCommands.contains(inputs[0])) {
-            		printError(input);
-        		} else {
-        			System.out.println("invalid command: " + input);
-        		}
+        		printError(input);
         	}
         }
         /* Write your code above */

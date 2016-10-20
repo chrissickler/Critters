@@ -84,6 +84,9 @@ public class Critter3 extends TestCritter{
 		if(opponent.equals("@")){
 			return true;
 		}
+		else {
+			
+		}
 		return true;
 	}
 	

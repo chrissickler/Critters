@@ -12,7 +12,6 @@
 package assignment4;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,6 @@ import java.util.List;
  * @author KSolomon
  */
 public abstract class Critter {
-	private static String myPackage = Critter.class.getPackage().toString().split(" ")[1] + ".";
 	private static java.util.Random rand = new java.util.Random();
 	
 	private Point location = new Point();
@@ -272,7 +270,9 @@ public abstract class Critter {
 		CritterWorld.removeDead();//removes all dead from the World
 		CritterWorld.makeAlgae();//adds algae to board
 		CritterWorld.addBabies();
+		timeStepConstants();
 	}
+	
 	/**
 	 * Displays the World in printed version on the consule
 	 */
@@ -324,5 +324,15 @@ public abstract class Critter {
 			}
 		}
 	}
+
+ 	/*
+ 	 * Time step initialization
+ 	 */
+ 	private static void timeStepConstants() {
+ 		for(Critter i : CritterWorld.critterMap.keySet()) {
+ 			i.hasMoved = false;
+ 			i.energy -= Params.rest_energy_cost;
+ 		}
+ 	}
 	
 }

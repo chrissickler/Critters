@@ -33,10 +33,12 @@ public class CritterWorld {
 	 * @param p
 	 * @return true if another critter has that same location
 	 */
-	public static boolean isOccupied(Critter me, Point p){
+	public static boolean isOccupied(Point p){
 		for(Critter i : critterMap.keySet()){
 			if(critterMap.get(i).equals(p)) {
-				if(i.equals(me)) continue;
+				if(i.getEnergy() > 0) { 	// ignore dead critters
+					continue;
+				}
 				else return true;
 			}
 		}
@@ -50,16 +52,29 @@ public class CritterWorld {
 	}
 	
 	public static boolean tryMove(Critter c, int direction, int distance) {
-		Point p1 = critterMap.get(c);
-		if(distance == 1) {
-			c.walk(direction);
+		Point p1 = critterMap.get(c); 
+		for(int i = 0; i < distance; i++) {
+			p1.update(direction);			// p1 is desired location
+		}		
+		
+		if(isOccupied(p1)) {
+			return false;
 		}
-		else if(distance == 2) {
-			c.run(direction);
+		else {
+			if(distance == 1) {
+				c.walk(direction);
+			}
+			else if(distance == 2) {
+				c.run(direction);
+			}
+			Point p2 = critterMap.get(c); 	// updated if run/walk are successful (hasn't already been done this timestep
+			if(p1.equals(p2)) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
-		Point p2 = critterMap.get(c);
-		if(p1.equals(p2))return true;
-		return false;
 	}
 	
 	/**
