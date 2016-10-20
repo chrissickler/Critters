@@ -1,5 +1,9 @@
 package assignment4;
 
+/**
+ * Point represents a critter's location in the world map as cartesian coordinates
+ * @author KSolomon
+ */
 public class Point {
 	private int x;
 	private int y;
@@ -27,6 +31,11 @@ public class Point {
 		this.y = y;
 	}
 	
+	/**
+	 * Changes the location to match moving a given direction by one.
+	 * If the critter moves off the side of the map it will reappear on the other side of the map.
+	 * @param direction direction of movement in one of 8 directions: 2 vertical, 2 lateral, 4 diagonal
+	 */
 	public void update(int direction) {
 		if(direction > 4) this.y = (this.y + 1) % Params.world_height;
 		else if (direction < 4 && direction > 0 ) this.y--;
@@ -35,11 +44,17 @@ public class Point {
 		if(this.x < 0){
 			this.x += Params.world_width;
 		}
+		this.x %= Params.world_width;
 		if(this.y < 0){
 			this.y += Params.world_height;
 		}
+		this.y %= Params.world_height;
 	}	
-	
+	/**
+	 * Determines if two points hold the same location
+	 * @param o the other point to compare location
+	 * @return true if this and o hold the same location, false otherwise
+	 */
 	public boolean equals(Point o) {
 		if(this.x == o.x && this.y == o.y){
 			return true;

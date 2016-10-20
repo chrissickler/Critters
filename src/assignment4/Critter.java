@@ -1,13 +1,12 @@
 /* CRITTERS Critter.java
  * EE422C Project 4 submission by
- * Replace <...> with your actual data.
- * <Student1 Name>
- * <Student1 EID>
- * <Student1 5-digit Unique No.>
- * <Student2 Name>
- * <Student2 EID>
- * <Student2 5-digit Unique No.>
- * Slip days used: <0>
+ * Karl Solomon
+ * Kws653
+ * 16445
+ * Christopher Sickler
+ * cbs2468
+ * 16445
+ * Slip days used: 0
  * Fall 2016
  */
 package assignment4;
@@ -21,17 +20,19 @@ import java.util.List;
  * no new public, protected or default-package code or data can be added to Critter
  */
 
-
+/**
+ * Critter class is parent abstract class for any critter subclass.
+ * Critter cannot be instantiated, but concrete subclasses of it can be.
+ * Contains methods and properties for normal critter function.
+ * @author KSolomon
+ */
 public abstract class Critter {
-	private static String myPackage = "assignment4.";
-	private Point location = new Point();
-	private boolean hasMoved = false;
-	// Gets the package name.  This assumes that Critter and its subclasses are all in the same package.
-	static {
-		myPackage = Critter.class.getPackage().toString().split(" ")[1];
-	}
-	
+	private static String myPackage = Critter.class.getPackage().toString().split(" ")[1] + ".";
 	private static java.util.Random rand = new java.util.Random();
+	
+	private Point location = new Point();
+	private boolean hasMoved = false;	
+	
 	public static int getRandomInt(int max) {
 		if(max <= 0) return 0;
 		return rand.nextInt(max);
@@ -40,7 +41,6 @@ public abstract class Critter {
 	public static void setSeed(long new_seed) {
 		rand = new java.util.Random(new_seed);
 	}
-	
 	
 	/* a one-character long string that visually depicts your critter in the ASCII interface */
 	public String toString() {
