@@ -2,7 +2,7 @@ package assignment4;
 
 import java.util.*;
 
-public class MyCritter8 extends Critter.TestCritter {
+public class MyCritter1 extends Critter.TestCritter {
 
 	@Override
 	public void doTimeStep() {
@@ -17,6 +17,10 @@ public class MyCritter8 extends Critter.TestCritter {
 	
 	public String toString() {
 		return "1";
+	}
+	
+	public boolean isDead(){
+		return this.getEnergy() < 1;
 	}
 	
 	public void test (List<Critter> l) {

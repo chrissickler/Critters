@@ -37,6 +37,11 @@ public abstract class Critter {
 		return rand.nextInt(max);
 	}
 	
+	//FIXME: MAY NOT BE LEGAL, BUT IN TEST CASES SO WTF NANDAKUMAR
+	public boolean isDead() {
+		return this.energy < 1;
+	}
+	
 	public static void setSeed(long new_seed) {
 		rand = new java.util.Random(new_seed);
 	}
@@ -169,6 +174,7 @@ public abstract class Critter {
 		return result;
 	}
 	
+
 	
 	
 	/**
@@ -226,6 +232,7 @@ public abstract class Critter {
 			return super.location.getY();
 		}
 		
+		
 
 		/*
 		 * This method getPopulation has to be modified by you if you are not using the population
@@ -236,6 +243,10 @@ public abstract class Critter {
 			List<Critter> population = (List<Critter>) new ArrayList<Critter>(CritterWorld.critterMap.keySet());
 			population.addAll(getBabies());
 			return population;
+		}
+		
+		protected static List<Critter> getPop() {
+			return getPopulation();
 		}
 		
 		/*
@@ -275,7 +286,7 @@ public abstract class Critter {
 	
 	/**
 	 * Displays the World in printed version on the consule
-	 */
+	 */ 
 	public static void displayWorld() {
 		CritterWorld.printWorld();
 	}

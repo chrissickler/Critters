@@ -123,7 +123,7 @@ public class A4SampleTest2 {
 		fighter.setX_coord(x);
 		fighter.setY_coord(y);
 		
-		assertEquals(num, TestCritter.getPop().get(p).size());
+		assertEquals(num, TestCritter.getPop().size());
 		if (DEBUG) System.out.println(TestCritter.getPop());
 		Critter.worldTimeStep();
 		if (DEBUG) {
