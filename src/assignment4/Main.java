@@ -32,10 +32,13 @@ public class Main {
     private static boolean DEBUG = false; // Use it or not, as you wish!
     static PrintStream old = System.out;	// if you want to restore output to console
     private static ArrayList<String> validCommands = new ArrayList<String>();
-
-
-    // Gets the package name.  The usage assumes that Critter and its subclasses are all in the same package.
-    static {
+    /**
+     * Main method.
+     * @param args args can be empty.  If not empty, provide two parameters -- the first is a file name, 
+     * and the second is test (for test output, where all output to be directed to a String), or nothing.
+     * @throws InvalidInputError 
+     */
+    public static void main(String[] args) {
         myPackage = Critter.class.getPackage().toString().split(" ")[1];
         validCommands.add("quit");
         validCommands.add("show");
@@ -43,15 +46,6 @@ public class Main {
         validCommands.add("seed");
         validCommands.add("make");
         validCommands.add("stats");
-    }
-
-    /**
-     * Main method.
-     * @param args args can be empty.  If not empty, provide two parameters -- the first is a file name, 
-     * and the second is test (for test output, where all output to be directed to a String), or nothing.
-     * @throws InvalidInputError 
-     */
-    public static void main(String[] args) { 
         if (args.length != 0) {
             try {
                 inputFile = args[0];
@@ -108,7 +102,7 @@ public class Main {
         			Critter.worldTimeStep();
         		}
         	}
-        	else if (input.equalsIgnoreCase("seed") && inputs.length == 2) {//DONE
+        	else if (inputs[0].equalsIgnoreCase("seed") && inputs.length == 2) {//DONE
         		try{
         			Long l = Long.parseLong(inputs[1]);//getting the long number to pass to seed
         			Critter.setSeed(l);
@@ -116,7 +110,7 @@ public class Main {
         			printError(input);
         		}        		
         	}
-        	else if (input.equalsIgnoreCase("make") && inputs.length > 1 && inputs.length < 4) {//DONE
+        	else if (inputs[0].equalsIgnoreCase("make") && inputs.length > 1 && inputs.length < 4) {//DONE
         		String packageName = "assignment4.";//tag to add to beginning of class name
         		int numMake = 1;
         		String name = inputs[1];
@@ -131,23 +125,23 @@ public class Main {
         			}
         		}
         	}
-        	else if (input.equalsIgnoreCase("stats") && inputs.length == 2) {//DONE
+        	else if (inputs[0].equalsIgnoreCase("stats") && inputs.length == 2) {//DONE
         		String packageName = "assignment4.";//tag to add to class name
-        		if(kb.hasNext()){
-        			String name = kb.next();//getting name of class to get stats for
-        			try{
-        				List <Critter> list = Critter.getInstances(packageName + name);
-        				//^^Retrieving the list of specific critters present in the world
-        				Class<?> myClass = Class.forName(packageName + name);
-        				//^^Creating Class object of the type of Critter input
-        				Method method = myClass.getMethod("runStats", List.class);
-        				//^^Retrieving the method runStats from the specific Class object
-        				method.invoke(null, list);//null because static, list is parameter
-        				//running the runStats method
-        			}catch(Exception e){
-        				printError(input);
-        			}
-        		}        		
+        		
+    			String name = inputs[1];//getting name of class to get stats for
+    			try{
+    				List <Critter> list = Critter.getInstances(packageName + name);
+    				//^^Retrieving the list of specific critters present in the world
+    				Class<?> myClass = Class.forName(packageName + name);
+    				//^^Creating Class object of the type of Critter input
+    				Method method = myClass.getMethod("runStats", List.class);
+    				//^^Retrieving the method runStats from the specific Class object
+    				method.invoke(null, list);//null because static, list is parameter
+    				//running the runStats method
+    			}
+    			catch(Exception e1){
+    				printError(input);
+    			}    		
         	}
         	else {
         		if(validCommands.contains(inputs[0])) {
