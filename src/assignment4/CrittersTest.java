@@ -60,7 +60,7 @@ public class CrittersTest {
 		Craig c = new Craig();
 		Critter.addCritter(c);
 		try {
-			Critter.makeCritter("assignment4.Craig");
+			Critter.makeCritter("Craig");
 		} catch (InvalidCritterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,10 +78,10 @@ public class CrittersTest {
 		int numCritters = 10;
 		try {
 			for(int i = 0; i < numCritters; i++) {
-				Critter.makeCritter("assignment4.Critter1");
-				Critter.makeCritter("assignment4.Critter2");
-				Critter.makeCritter("assignment4.Critter3");
-				Critter.makeCritter("assignment4.Critter4");
+				Critter.makeCritter("Critter1");
+				Critter.makeCritter("Critter2");
+				Critter.makeCritter("Critter3");
+				Critter.makeCritter("Critter4");
 			}
 		} catch (InvalidCritterException e) {
 			// TODO Auto-generated catch block

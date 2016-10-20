@@ -34,7 +34,7 @@ public class CritterSystemTest {
 		 */
 	}
 	
-	//@Test
+	@Test
 	public void testSystem2() {
 		String inputFile = "mainTest3.txt";
 		String[] args = {inputFile};

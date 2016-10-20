@@ -74,7 +74,7 @@ public class Main {
         String input;
         String[] inputs;
         while(true) {
-        	if(kb.equals(System.in)){
+        	if(kb.equals(System.in)){	//FIXME: DOESN'T ever evaluate to true
         		System.out.println("critters> ");
         	}
         	input = kb.nextLine();
@@ -90,8 +90,8 @@ public class Main {
         		int numSteps = 1;
         		if(inputs.length == 2) {
         			try {
-        				numSteps = Integer.parseInt(inputs[1]);
-        			} catch (NumberFormatException e) {
+        				numSteps = Integer.parseInt(inputs[2]);
+        			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
         				printError(input);
         				continue;
         			}
@@ -109,19 +109,23 @@ public class Main {
         		}        		
         	}
         	else if (inputs[0].equalsIgnoreCase("make") && inputs.length > 1 && inputs.length < 4) {//DONE
-        		String packageName = "assignment4.";//tag to add to beginning of class name
         		int numMake = 1;
         		String name = inputs[1];
         		if(inputs.length == 3) {
         			try {
         				numMake = Integer.parseInt(inputs[2]); 
-        				for(int i = 0; i < numMake; i++) {
-        					Critter.makeCritter(packageName + name); 
-        				}
-        			} catch (InvalidCritterException | NumberFormatException  e) {
+        				
+        			} catch (NumberFormatException  e) {
         				printError(input);
         			}
         		}
+        		try{
+	        		for(int i = 0; i < numMake; i++) {
+						Critter.makeCritter(name);
+					}
+	        	}catch (InvalidCritterException e) {
+					System.out.println(e.toString());
+				} 
         	}
         	else if (inputs[0].equalsIgnoreCase("stats") && inputs.length == 2) {//DONE
         		

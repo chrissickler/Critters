@@ -13,6 +13,7 @@ package assignment4;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 /* see the PDF for descriptions of the methods and fields in this class
@@ -146,7 +147,7 @@ public abstract class Critter {
 		List<Critter> result = new java.util.ArrayList<Critter>();
 		Critter critter;
 		try{
-			Class<?> c = Class.forName(critter_class_name);//Creates a class object of type given by name
+			Class<?> c = Class.forName("assignment4."+critter_class_name);//Creates a class object of type given by name
 			Constructor<?> newCon = c.getConstructor();//gets the constructor for that class
 			Object obj = newCon.newInstance();//creates the actual object using the constructor
 			critter = (Critter)obj;//casts the object as a critter type
@@ -233,9 +234,10 @@ public abstract class Critter {
 		 * ArrayList that has been provided in the starter code.  In any case, it has to be
 		 * implemented for grading tests to work.
 		 */
-		@SuppressWarnings("unchecked")
 		protected static List<Critter> getPopulation() {
-			return (List<Critter>) (Critter) CritterWorld.critterMap.keySet();
+			List<Critter> population = (List<Critter>) new ArrayList<Critter>(CritterWorld.critterMap.keySet());
+			population.addAll(getBabies());
+			return population;
 		}
 		
 		/*
@@ -245,7 +247,8 @@ public abstract class Critter {
 		 * at either the beginning OR the end of every timestep.
 		 */
 		protected static List<Critter> getBabies() {
-			return (List<Critter>) (Critter) CritterWorld.babies.keySet();
+			List<Critter> babyList = (List<Critter>) new ArrayList<Critter>(CritterWorld.babies.keySet());
+			return babyList;
 		}
 	}
 
@@ -284,7 +287,7 @@ public abstract class Critter {
 	 * the critter with the higher roll gains 1/2 the energy from the loser
 	 * the loser dies and loses its energy
 	 */
-	private static void handleInteractions(){
+ 	private static void handleInteractions(){
 		boolean aFight;
 		boolean bFight;
 		int aRoll = 0;
