@@ -75,8 +75,8 @@ public class A4SampleTest2 {
 	 * @throws InvalidCritterException
 	 */
 	public void testWalk() throws InvalidCritterException {
-		Critter.makeCritter("MyCritter8");
-		MyCritter8 m1 = (MyCritter8) Critter.TestCritter.getPopulation().get(0);
+		Critter.makeCritter("MyCritter1");
+		MyCritter1 m1 = (MyCritter1) Critter.TestCritter.getPopulation().get(0);
 		int x1a = m1.getX_coord(); int  y1a = m1.getY_coord();
 		m1.doTimeStep();
 		int x1b = m1.getX_coord(); int  y1b = m1.getY_coord();
@@ -90,11 +90,11 @@ public class A4SampleTest2 {
 	 * Walks 1 step each turn.  Check energy drop at each turn.
 	 */
 	public void WalkEnergyTest() throws InvalidCritterException {
-		Critter.makeCritter("MyCritter8");
-		MyCritter8 c = (MyCritter8) Critter.TestCritter.getPopulation().get(0);
+		Critter.makeCritter("MyCritter1");
+		MyCritter1 c = (MyCritter1) Critter.TestCritter.getPopulation().get(0);
 		int step = 0;
 		int energyUsePerStep = Params.rest_energy_cost + Params.walk_energy_cost;
-		while (c.getEnergy() > 0) {
+		while (!c.isDead()) {
 			assertEquals(Params.start_energy -step*energyUsePerStep, c.getEnergy());
 			Critter.worldTimeStep();
 			step++;
@@ -123,14 +123,14 @@ public class A4SampleTest2 {
 		fighter.setX_coord(x);
 		fighter.setY_coord(y);
 		
-		assertEquals(num, TestCritter.getPopulation().size());
-		if (DEBUG) System.out.println(TestCritter.getPopulation().get(0));
+		assertEquals(num, TestCritter.getPop().get(p).size());
+		if (DEBUG) System.out.println(TestCritter.getPop());
 		Critter.worldTimeStep();
 		if (DEBUG) {
-			System.out.println(TestCritter.getPopulation().get(1));	
+			System.out.println(TestCritter.getPop());	
 			Critter.displayWorld();
 		}
-		assertFalse(runner.getEnergy() <= 0);
+		assertFalse(runner.isDead());
 		assertTrue(runner.getX_coord() != x || runner.getY_coord() != y);
 		assertTrue(fighter.getX_coord() == x && fighter.getY_coord() == y);
 	}
