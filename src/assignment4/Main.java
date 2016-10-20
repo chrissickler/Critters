@@ -11,6 +11,7 @@
  * Fall 2016
  */
 package assignment4; // cannot be in default package
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.io.*;
@@ -30,11 +31,18 @@ public class Main {
     private static String myPackage;	// package of Critter file.  Critter cannot be in default pkg.
     private static boolean DEBUG = false; // Use it or not, as you wish!
     static PrintStream old = System.out;	// if you want to restore output to console
+    private static ArrayList<String> validCommands = new ArrayList<String>();
 
 
     // Gets the package name.  The usage assumes that Critter and its subclasses are all in the same package.
     static {
         myPackage = Critter.class.getPackage().toString().split(" ")[1];
+        validCommands.add("quit");
+        validCommands.add("show");
+        validCommands.add("step");
+        validCommands.add("seed");
+        validCommands.add("make");
+        validCommands.add("stats");
     }
 
     /**
@@ -72,69 +80,56 @@ public class Main {
         /* Do not alter the code above for your submission. */
         /* Write your code below. */
         String input;
+        String[] inputs;
         while(true) {
-<<<<<<< HEAD
         	if(kb.equals(System.in)){
         		System.out.println("critters> ");
         	}
-        	input = kb.nextLine();//input string for reading
-        	String[] inputs = input.split(" ");
+        	input = kb.nextLine();
+        	inputs = input.split(" ");
         	
         	if(inputs[0].equalsIgnoreCase("quit") && inputs.length == 1) {//DONE
-=======
-        	System.out.print("critters> ");
-        	input = kb.next();//input string for reading
-        	if(input.equalsIgnoreCase("quit")) {//DONE
->>>>>>> 16adbe140e7b96557afe1b5c0ba479a649ad381f
         		break;//breaking the loop and ending the program
         	}
         	else if (inputs[0].equalsIgnoreCase("show") && inputs.length == 1) {//DONE
         		Critter.displayWorld();//displaying the world     		
         	}
         	else if (inputs[0].equalsIgnoreCase("step") && inputs.length < 3) {//DONE
-        		try {										
-					int numSteps = Integer.parseInt(inputs[1]); //updating number of steps       			
-					for(int i = 0; i < numSteps; i++){
-						Critter.worldTimeStep();//stepping the World 
-					}
-				} catch (NumberFormatException e) {//if an error was found in the input
-					printError(input);
-				} catch (IndexOutOfBoundsException e1) {
-					Critter.worldTimeStep();
-				}
+        		int numSteps = 1;
+        		if(inputs.length == 2) {
+        			try {
+        				numSteps = Integer.parseInt(inputs[1]);
+        			} catch (NumberFormatException e) {
+        				printError(input);
+        				continue;
+        			}
+        		}
+        		for(int i = 0; i < numSteps; i++) {
+        			Critter.worldTimeStep();
+        		}
         	}
         	else if (input.equalsIgnoreCase("seed") && inputs.length == 2) {//DONE
-        		String s = kb.next();
         		try{
-        			Long l = Long.parseLong(s);//getting the long number to pass to seed
+        			Long l = Long.parseLong(inputs[1]);//getting the long number to pass to seed
         			Critter.setSeed(l);
         		}catch(NumberFormatException e){//if error was found in the input
-        			printError(s);
-        		}
-        		
+        			printError(input);
+        		}        		
         	}
         	else if (input.equalsIgnoreCase("make") && inputs.length > 1 && inputs.length < 4) {//DONE
         		String packageName = "assignment4.";//tag to add to beginning of class name
         		int numMake = 1;
-        		if(kb.hasNext()){
-        			String name = kb.next();//gets the name of the Critter type
-        			if(kb.hasNextInt()){
-        				input = kb.next();
-        				numMake = Integer.parseInt(input);//parses the int out of input
-        			}
-        			try{
-        				for(int i = 0; i < numMake; i++){
-        					Critter.makeCritter(packageName + name);//adds critter to world
-            			}
-        			}catch(InvalidCritterException e){//if the name of the critter was invalid
+        		String name = inputs[1];
+        		if(inputs.length == 3) {
+        			try {
+        				numMake = Integer.parseInt(inputs[2]); 
+        				for(int i = 0; i < numMake; i++) {
+        					Critter.makeCritter(packageName + name); 
+        				}
+        			} catch (InvalidCritterException | NumberFormatException  e) {
         				printError(input);
         			}
-        			
-<<<<<<< HEAD
-        		} 	
-=======
         		}
->>>>>>> 16adbe140e7b96557afe1b5c0ba479a649ad381f
         	}
         	else if (input.equalsIgnoreCase("stats") && inputs.length == 2) {//DONE
         		String packageName = "assignment4.";//tag to add to class name
@@ -149,16 +144,17 @@ public class Main {
         				//^^Retrieving the method runStats from the specific Class object
         				method.invoke(null, list);//null because static, list is parameter
         				//running the runStats method
-        				
-
         			}catch(Exception e){
         				printError(input);
         			}
         		}        		
         	}
         	else {
-        		printError(input);
-        		//throw new InvalidInputError();//TODO: INVALID INPUT
+        		if(validCommands.contains(inputs[0])) {
+            		printError(input);
+        		} else {
+        			System.out.println("invalid command: " + input);
+        		}
         	}
         }
         /* Write your code above */
