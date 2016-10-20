@@ -11,21 +11,24 @@
  */
 package assignment4;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import assignment4.Critter.TestCritter;
 
 public class CritterWorld {
-	public static Map<TestCritter, Point> critterMap = new ConcurrentHashMap<TestCritter, Point>();	//official record of Critters and their location
-	public static Map<TestCritter, Point> babies = new HashMap<>();
+	public static Map<Critter, Point> critterMap = new HashMap<Critter, Point>();	//official record of Critters and their location
+	public static Map<Critter, Point> babies = new HashMap<>();
 	private static int width = Params.world_width;
 	private static int height = Params.world_height;
 	private static String[][] world = new String[width][height];	// for display purposes only
 
 	public static void addCritter(Critter c, Point p) {
-		babies.put((TestCritter) c, p);
+		critterMap.put((TestCritter) c, p);
 	}
 	
 	/**
@@ -81,11 +84,24 @@ public class CritterWorld {
 	 * Removes all dead critters from the critterMap
 	 */
 	public static void removeDead(){
-		for(Critter i : critterMap.keySet()){
-			if(i.getEnergy() <= 0){
-				critterMap.remove(i);
+		
+		for(Iterator<Critter> iterator = critterMap.keySet().iterator(); iterator.hasNext();){
+			Critter c = iterator.next();
+			if(c.getEnergy() < 1) {
+				iterator.remove();
 			}
 		}
+		
+		
+//		critterMap.keySet().removeIf(filter)
+//		for(Critter i : critterMap.keySet().remo){
+//			critterMap
+//			if(i.getEnergy() <= 0){
+//				critterMap.remove(i).;
+//			}
+//		}
+//		
+//		for(int i = 0; i < critterMap.keySet().)
 	}
 	
 	public static void doTimeStep(){
@@ -132,7 +148,7 @@ public class CritterWorld {
 	 */
 	public static void clearWorld(){
 		world = new String[width][height];
-		critterMap = new HashMap<TestCritter, Point>();
+		critterMap = new HashMap<Critter, Point>();
 	}
 	
 	/**

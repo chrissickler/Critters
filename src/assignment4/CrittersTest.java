@@ -89,9 +89,9 @@ public class CrittersTest {
 		}
 		int numCrittersBefore = CritterWorld.babies.keySet().size();
 		Critter.worldTimeStep();
-		for(TestCritter i : CritterWorld.critterMap.keySet()){
-			i.setX_coord(0);
-			i.setY_coord(0);
+		for(Critter i : CritterWorld.critterMap.keySet()){
+			((Critter.TestCritter) i).setX_coord(0);
+			((Critter.TestCritter) i).setY_coord(0);
 		}
 		Critter.worldTimeStep();
 		int numCrittersAfter = CritterWorld.critterMap.keySet().size();

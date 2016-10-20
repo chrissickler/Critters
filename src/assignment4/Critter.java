@@ -97,7 +97,7 @@ public abstract class Critter {
 			//^^Dividing up the energy between the baby and the parent
 			offspring.location = new Point(this.location.getX(), this.location.getY());
 			offspring.location.update(direction);//giving the baby a location
-			CritterWorld.babies.put((TestCritter) offspring, offspring.location);//adding baby to CritterWorld baby list
+			CritterWorld.babies.put((Critter) offspring, offspring.location);//adding baby to CritterWorld baby list
 		}
 	}
 	
@@ -277,11 +277,16 @@ public abstract class Critter {
 	 */
 	public static void worldTimeStep() {
 		CritterWorld.doTimeStep();//does all time steps
+		for(Critter i : CritterWorld.critterMap.keySet()) {
+			i.energy -= Params.rest_energy_cost;
+		}
 		handleInteractions();//handles fights
 		CritterWorld.removeDead();//removes all dead from the World
 		CritterWorld.makeAlgae();//adds algae to board
 		CritterWorld.addBabies();
-		timeStepConstants();
+		for(Critter i: CritterWorld.critterMap.keySet()) {
+			i.hasMoved = false;
+		}
 	}
 	
 	/**
@@ -334,16 +339,5 @@ public abstract class Critter {
 				}
 			}
 		}
-	}
-
- 	/*
- 	 * Time step initialization
- 	 */
- 	private static void timeStepConstants() {
- 		for(Critter i : CritterWorld.critterMap.keySet()) {
- 			i.hasMoved = false;
- 			i.energy -= Params.rest_energy_cost;
- 		}
- 	}
-	
+	}	
 }
