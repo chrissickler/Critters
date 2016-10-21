@@ -93,7 +93,7 @@ public class Main {
         		int numSteps = 1;
         		if(inputs.length == 2) {
         			try {
-        				numSteps = Integer.parseInt(inputs[2]);
+        				numSteps = Integer.parseInt(inputs[1]);
         			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
         				printError(input);
         				continue;
