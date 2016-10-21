@@ -1,4 +1,5 @@
-/* 
+/**
+ * Critter2.java 
 * EE422C Project 4 submission by
  * Karl Solomon
  * Kws653
