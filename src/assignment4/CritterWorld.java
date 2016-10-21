@@ -84,14 +84,12 @@ public class CritterWorld {
 	 * Removes all dead critters from the critterMap
 	 */
 	public static void removeDead(){
-		
 		for(Iterator<Critter> iterator = critterMap.keySet().iterator(); iterator.hasNext();){
 			Critter c = iterator.next();
 			if(c.getEnergy() < 1) {
 				iterator.remove();
 			}
-		}
-		
+		}		
 		
 //		critterMap.keySet().removeIf(filter)
 //		for(Critter i : critterMap.keySet().remo){
@@ -171,7 +169,6 @@ public class CritterWorld {
 			}
 			sb.append("|\n");
 		}
-		//TODO: iterate through the world and print each row
 		sb.append(top);
 		System.out.println(sb.toString());
 	}
