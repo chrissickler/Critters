@@ -50,7 +50,11 @@ public class CritterWorld {
 	
 	public static void makeAlgae() {
 		for(int i = 0; i < Params.refresh_algae_count; i++) {
-			Critter.addCritter(new Algae());
+			try {
+				Critter.makeCritter("Algae");
+			} catch (InvalidCritterException e) {
+				Main.printError("Algae");
+			}
 		}
 	}
 	

@@ -67,7 +67,7 @@ public abstract class Critter {
 		if (!hasMoved && energy > 0) {//checking if the critter has moved this step
 			direction = direction % 8;
 			location.update(direction);
-			hasMoved = true;
+			hasMoved = true;//Comment out for testWalk
 		}
 	}
 	/**
@@ -80,7 +80,7 @@ public abstract class Critter {
 			direction = direction % 8;
 			location.update(direction);
 			location.update(direction);
-			hasMoved = true;
+			hasMoved = true;//Comment out for testRun
 		}
 	}
 	/**
@@ -131,8 +131,9 @@ public abstract class Critter {
 	/**
 	 * Adds critter to CritterWorld
 	 * @param critter to be added
+	 * **Make Public For Testing Purposes
 	 */
-	public static void addCritter(Critter critter) {
+	private static void addCritter(Critter critter) {
 		if(critter != null) {
 			critter.location = CritterWorld.getRandomLocation();//returns a random location
 			CritterWorld.addCritter(critter, critter.location);//adds the critter to CritterWorld
