@@ -69,15 +69,15 @@ public class A4SampleTest{
 		Params.photosynthesis_energy_amount = 1;
 		Params.start_energy = 5;
 		
-		String fileFolder = "kill_all_critter";
-		String[] inputs = {TESTSRCDIR + fileFolder + "/input.txt" ,"test"};
+		String fileFolder = "kill_all_critter_";
+		String[] inputs = {fileFolder + "input.txt" ,"test"};
 		
 		Main.main(inputs);
 		outContent = Main.testOutputString;
 		
 		Scanner scanner = null;
 		try {
-			scanner = new Scanner( new File(TESTSRCDIR + fileFolder + "/expected_output.txt") );
+			scanner = new Scanner( new File(fileFolder + "expected_output.txt") );
 		} catch (FileNotFoundException e) {
 		
 			e.printStackTrace();
@@ -119,15 +119,15 @@ public class A4SampleTest{
 		
 		*/
 		
-		String fileFolder = "error_processing";
-		String[] inputs = {TESTSRCDIR + fileFolder + "/input.txt" ,"test"};
+		String fileFolder = "error_processing_";
+		String[] inputs = {fileFolder + "input.txt" ,"test"};
 		
 		Main.main(inputs);
 		outContent = Main.testOutputString;
 		
 		Scanner scanner = null;
 		try {
-			scanner = new Scanner( new File(TESTSRCDIR + fileFolder + "/expected_output.txt") );
+			scanner = new Scanner( new File(fileFolder + "expected_output.txt") );
 		} catch (FileNotFoundException e) {
 		
 			e.printStackTrace();
@@ -137,6 +137,44 @@ public class A4SampleTest{
 		scanner.close();
 		assertThat(text, containsString(output));
 		
+	}
+	
+	@Test
+	public void EmptyWorld() {
+		String fileFolder = "empty_world_";
+		String[] inputs = {fileFolder + "input.txt", "test"};
+		Main.main(inputs);
+		outContent = Main.testOutputString;
+		Scanner scanner = null;
+		try {
+			scanner = new Scanner( new File(fileFolder + "expected_output.txt") );
+		} catch (FileNotFoundException e) {
+		
+			e.printStackTrace();
+		}
+		String text = scanner.useDelimiter("\\A").next().trim();
+		String output = outContent.toString().replace("critter>","").trim();
+		scanner.close();
+		assertThat(text, containsString(output));
+	}
+	
+	@Test
+	public void LargeCritter() {
+		String fileFolder = "make_large_critter_";
+		String[] inputs = {fileFolder + "input.txt", "test"};
+		Main.main(inputs);
+		outContent = Main.testOutputString;
+		Scanner scanner = null;
+		try {
+			scanner = new Scanner( new File(fileFolder + "expected_output.txt") );
+		} catch (FileNotFoundException e) {
+		
+			e.printStackTrace();
+		}
+		String text = scanner.useDelimiter("\\A").next().trim();
+		String output = outContent.toString().replace("critter>","").trim();
+		scanner.close();
+		assertThat(text, containsString(output));
 	}
 	
 	
